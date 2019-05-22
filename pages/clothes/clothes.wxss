@@ -1,0 +1,116 @@
+/* pages/clothes/clothes.wxss */
+
+.title {
+  margin: 8vw 0 7vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  flex: 0;
+}
+
+.title image {
+  width: 18vw;
+  height: 18vw;
+  margin: 0 2vw;
+}
+
+.title text {
+  height: 18vw;
+  line-height: 18vw;
+  color: rgb(67,174,43);
+  font-size: 5vw;
+}
+
+
+.subtitle {
+  color: rgb(67,174,43);
+  font-size: 24rpx;
+  
+  margin-bottom: 8vw;
+  margin-left: 5vw;
+}
+
+.subtitle text {
+  display: inline-block;
+  line-height: 40rpx;
+  height: 40rpx;
+}
+
+.subtitle .cross {
+ 
+  transform: rotate(45deg)scale(1.5);
+}
+
+.subtitle .text {
+
+  margin: 0 20rpx;
+  border-bottom: solid 1px rgb(67,174,43);
+}
+
+
+scroll-view {
+  flex: 1;
+  overflow: scroll;
+}
+
+.clothes-input  {
+  margin-bottom: 100rpx;
+}
+
+.bottom-button {
+  height: 10vh;
+  width: 100vw;
+
+  flex-shrink: 0;
+
+  background-color: #3bb920;
+
+  display: flex;
+}
+
+.bottom-button text {
+  margin: auto;
+  color: #fff;
+}
+
+.image-selector {
+  width: 80%;
+  padding-bottom: 34.615%;
+  border: dashed 2px #3bb920;
+
+  border-radius: 10px;
+
+  margin: auto;
+  position: relative;
+
+  margin-bottom: 50rpx;
+}
+
+.image-selector image, .image-selector view {
+  position: absolute;
+
+  height: auto;
+  width: auto;
+
+  margin: 8px;
+
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: rgb(215,242,211);
+
+  border-radius: 8px;
+}
+
+.image-selector view {
+  background-position: center center;
+  background-size: cover;
+}
+
+.image-selector .upload-icon {
+  height: 60rpx;
+  width:  60rpx;
+  margin: auto;
+}

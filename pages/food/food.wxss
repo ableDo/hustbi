@@ -1,0 +1,95 @@
+/* pages/food/food.wxss */
+/* pages/bus/bus.wxss */
+
+.wrapper {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+}
+
+.bottom-button {
+  height: 10vh;
+  width: 100vw;
+
+  flex-shrink: 0;
+
+  background-color: #3bb920;
+
+  display: flex;
+}
+
+.bottom-button text {
+  margin: auto;
+  color: #fff;
+}
+
+.header {
+  position: absolute;
+
+  top: 0;
+
+
+  width: 100%;
+}
+
+.header .upload-link-wrapper {
+  display: flex;
+}
+
+.header .upload-link {
+  margin: auto;
+  height: 6vw;
+  line-height: 6vw;
+  border-bottom: 1px solid rgb(67,174,43);
+
+  color: rgb(67,174,43);
+  font-size: 3.5vw;
+}
+
+.header .title {
+  margin: 12vw 0 11vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.header .title image {
+  width: 18vw;
+  height: 18vw;
+  margin: 0 2vw;
+}
+
+.header .title text {
+  height: 18vw;
+  line-height: 18vw;
+  color: rgb(67,174,43);
+  font-size: 5vw;
+}
+
+
+.footer {
+  position: absolute;
+  height: 45vw;
+
+  width: 100%;
+  bottom: 0;
+}
+
+.footer .form-link-wrapper {
+  display: flex;
+
+  margin-bottom: 10vw;
+}
+
+.footer .form-link {
+  margin: auto;
+  height: 6vw;
+  line-height: 6vw;
+  border-bottom: 1px solid rgb(67,174,43);
+
+  color: rgb(67,174,43);
+  font-size: 3.5vw;
+}
+

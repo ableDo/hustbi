@@ -1,0 +1,14 @@
+<view class='fly'>
+  <image src='./pic_uplod.png' class='image'></image>
+  <view class='green-circle-wrapper' wx:if='{{!imagePath}}' bindtap='onRequestUploadImage'>
+    <view class='green-circle'></view>
+    <view class='dotted-circle'></view>
+    <image class='image' src='./icon_upload.png'></image>
+    </view>
+  <view class='uploading' wx:else bindtap='onRequestUploadImage'>
+    <view class='image-to-upload' style="background-image:url({{imagePath}});">
+      <view class='uploading-cover' style="transform: scaleY({{1 - uploadProgress / 100}});"></view>
+      <image class='image' src='./icon_upload.png' style="opacity: {{1 - uploadProgress / 100}};"></image>
+    </view>
+  </view>
+</view>

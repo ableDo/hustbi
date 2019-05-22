@@ -1,0 +1,41 @@
+<!--pages/userpoints/userpoints.wxml-->
+
+<view class='userpoints-userinfo'>
+  <view class='userpoints-bg-wrapper'>
+    <image class='userpoints-bg' src='./bg_userinfor.png'></image>
+  </view>
+
+  <view class='userpoints-points-icon-wrapper'>
+    <image class='userpoints-points-icon' src='./bg_userpoints.png'>`</image>
+
+    <text class='userpoints-number-tip'>{{t["积分值"][l]}}</text>
+    <text class='userpoints-number'>{{points}}</text>
+  </view>
+
+  <view class='userpoints-rules-linker-wrapper'>
+    <text class='userpoints-rules-linker' bindtap='viewRule'>{{t["查看积分兑换规则"][l]}}</text>    
+  </view>
+</view>
+
+<view class='userpoints-inputs'>
+  
+  <view wx:if="{{isFirst}}" class="stuff-channel" bindtap='stuffChannel'>{{!isStuff ? t["员工"][l] : t["学生"][l]}}{{t["通道"][l]}} ></view>
+
+  <view class="userpoints-input-wrapper + {{activeInput === item.id ? ' focus' : ''}} + {{wrongFields[item.id] ? ' wrong' : ''}}" wx:for='{{form}}'>
+    <view class='label'>{{item.title}}</view>
+    <view class="divider"></view>
+    <input
+      placeholder='{{t["未填写"][l]}}'
+      id='{{item.id}}'
+      bindinput='onFormInput'
+      bindfocus='onFormFocus'
+      bindblur='onFormBlur'
+      value="{{formData[item.id]}}"
+    ></input>
+  </view>
+</view>
+<view class="placeholder"></view>
+
+<view class="float-button" bindtap='submit'>
+  <image src="../food-list/yes.png"></image>
+</view>

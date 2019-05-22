@@ -1,0 +1,23 @@
+<!--pages/trash/trash.wxml-->
+<!-- <text>pages/trash/trash.wxml</text> -->
+<view class="input-wrapper">
+  <input placeholder='{{t["请输入垃圾名称搜索"][l]}}' bindinput='onSearchInput'></input>
+
+</view>
+
+<scroll-view class="list">
+  <view wx:for="{{result}}" style="margin-bottom: 10px;">
+    <view class="title">{{item.name}}</view>
+    <view class="list-head">
+      <label class="dot"></label>
+      <label class="text">{{item.type}}</label>
+    </view>
+    <view class="list-head">
+      <label class="dot"></label>
+      <label class="text">垃圾简介</label>
+    </view>
+    <view class="content">
+      <label>　　</label> {{item.description}}
+    </view>
+  </view>
+</scroll-view>

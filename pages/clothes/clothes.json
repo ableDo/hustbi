@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "recycle-input": "../../components/recycle-input/recycle-input"
+  }
+}

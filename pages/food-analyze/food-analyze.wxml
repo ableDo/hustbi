@@ -1,0 +1,60 @@
+<!--pages/food-analyze/food-analyze.wxml-->
+<!-- <text>pages/food-analyze/food-analyze.wxml</text> -->
+
+<view class="main-title">
+  {{t["今日减少碳排放"][l]}}
+</view>
+
+<view class="numbers">
+  <view class="left-number">
+    <view class="text-1">{{t["相当于"][l]}}</view>
+    <view class="text-2">{{tree}}{{t["棵树"][l]}}</view>    
+  </view>
+  <view class="center-number">
+    <image src="./bg_foodanaly@2x.png"></image>
+    <view>{{reduce_carbon}}g</view>
+  </view>
+  <view class="right-number">
+    <view class="text-1">{{t["减少耗能"][l]}}</view>
+    <view class="text-2">{{reduce_calory}}</view>
+  </view>  
+</view>
+
+<view class="meals" bindtap='onMealTap' id="wrapper">
+  <view class="meal">
+    <image src="./icon_breakfast@2x.png" id="breakfast"></image>
+    <label>{{t["早餐"][l]}}</label>
+  </view>
+  <view class="meal">
+    <image src="./icon_lunch@2x.png" id="lunch"></image>
+    <label>{{t["午餐"][l]}}</label>    
+  </view>
+  <view class="meal">
+    <image src="./icon_dinner@2x.png" id="dinner"></image>
+    <label>{{t["晚餐"][l]}}</label>    
+  </view>
+  <view class="meal">
+    <image src="./icon_addmeal@2x.png" id="addmeal"></image>
+    <label>{{t["加餐"][l]}}</label>    
+  </view>  
+</view>
+
+<view class="list">
+  <view class="breakfast" data-type='{{item.id}}' wx:for="{{meals}}" bindtap='onFoodListTap'>
+    <view class="list-head"><label class="dot"></label><label class="text">{{item.name}}</label></view>
+    <view class="list-item" wx:for="{{item.foods}}">
+      <view class="left-img">
+        <image src='https://temp.l-do.cn{{item.thumb_image_name}}'></image>
+      </view>
+      <view class="text">
+        <view class="title">{{item.name}}</view>
+        <view class="content">{{item.count}}{{t["个"][l]}}</view>
+      </view>
+      <view class="right-text">{{item.overallWeight}}{{item.is_liquid ? "mL": "g"}}</view>      
+    </view>
+  </view>
+</view>
+
+<view class="no-meals" wx:if="{{meals.length === 0}}">
+  {{t["暂时没有饮食记录"][l]}}
+</view>

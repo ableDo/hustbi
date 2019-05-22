@@ -1,0 +1,192 @@
+/* pages/steps/steps.wxss */
+
+.steps-bg-wrapper {
+  width: 100vw;
+  height: 68.15vw;
+
+  position: relative;
+}
+
+.steps-bg {
+  width: 100%;
+  height: 100%;
+
+  position: absolute;
+
+  z-index: -1;
+}
+
+.steps-step-info {
+  flex-grow: 1;
+}
+
+.step-icon-wrapper .dot {
+  width: 14rpx;
+  height: 14rpx;
+  background-color: rgb(49,185,33);
+  border-radius: 50%;
+  margin: auto;
+  position: absolute;
+  bottom: 50rpx;
+  left: 0;
+  right: 0;
+}
+
+.step-icon-wrapper label {
+  color: rgb(44,154,66);
+  width: 100%;
+  display: inline-block;
+  text-align: center;
+  font-size: 30rpx;
+  position: absolute;
+  bottom: 0;
+}
+
+.step-icon-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 30vh;
+  position: relative;
+  margin-bottom: 4vh;
+}
+
+.step-icon {
+  width: 25%;
+  height: 0;
+  padding-bottom: 27.111%;
+  margin: auto;
+  position: relative;
+}
+.step-icon image {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transform: scale(0.9)
+}
+
+.step-number-wrapper {
+  display: flex;
+  flex-direction: row;
+
+  justify-content: center;
+}
+
+.step-number-wrapper .step-left-text, .step-number-wrapper .step-right-text{
+  color: rgb(44,154,66);
+
+  width: 10vw;
+
+  font-size: 26rpx;
+
+  margin: 0 30rpx;
+
+  line-height: 18vw;
+}
+
+.step-number-wrapper .step-left-text {
+  text-align: end;
+}
+
+.step-number-wrapper .step-number {
+  width: 48vw;
+  height: 18vw;
+
+  background-color: rgb(55,186,31);
+  border-radius: 16rpx;
+
+  transform: scale(0.9);
+
+  line-height: 18vw;
+
+  font-size: 90rpx;
+  text-align: center;
+
+  color: #fff;
+}
+
+.step-equal-points {
+  width: 48vw;
+
+  transform: scale(0.9);
+
+  margin: 30rpx auto;
+
+  color: rgb(44,154,66);
+
+  font-size: 28rpx;
+
+}
+
+.step-equal-points text {
+  color: rgb(165,255,4);
+
+  margin: 0 10rpx;
+}
+
+.steps-navs {
+  display: flex;
+  flex-direction: row;
+
+  position: absolute;
+  height: 20vw; 
+  width: 100vw;
+
+  margin: auto;
+
+  top: -8vw;
+  bottom: 0;
+
+  justify-content: space-between;
+}
+
+.navs-icons {
+  width: 70vw;
+
+  flex-shrink: 0;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.navs-icon {
+  width: 20vw;
+  height: 21.73vw;
+
+  transform: scale(0.9)
+}
+
+.navs-icon image {
+  width: 100%;
+  height: 100%;
+}
+
+.navs-icon text {
+  color: #fff;
+  font-size: 30rpx;
+
+  display: inline-block;
+
+  width: 20vw;
+
+  text-align: center;
+
+  margin: 20rpx 0;
+}
+
+.navs-left-arrow, .navs-right-arrow {
+  width: 11.69vw;
+  display: flex;
+  visibility: hidden;
+}
+
+.navs-left-arrow image, .navs-right-arrow image {
+  width: 30%;
+  height: 30%;
+
+  margin: auto;
+}
+
+.navs-left-arrow.disabled image, .navs-right-arrow.disabled image {
+  opacity: 0.2;
+}

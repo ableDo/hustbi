@@ -1,0 +1,85 @@
+/* components/recycle-input/recycle-input.wxss */
+
+.recycle-input {
+  height: 8vh;
+  display: flex;
+  flex-direction: row;
+  padding-right: 20vw;
+  margin-bottom: 3vh;
+}
+.recycle-input .title {
+  flex-shrink: 0;
+  background-color: rgb(235,248,231);
+  /* background-color: rgb(58,135,33); */
+  height: 8vh;
+  width: 40vw;
+
+  box-sizing: border-box;
+
+  padding-left: 8vw;
+
+  display: inline-block;
+  border-bottom-right-radius: 4vh;
+  border-top-right-radius: 4vh;
+  line-height: 8vh;
+  text-align: center;
+  color: rgb(43,154,66);
+  font-size: 4vw;
+
+  margin-right: 5vw;
+}
+
+.recycle-input .dot {
+  flex-basis: 8vw;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.dot view {
+  width: 6px;
+  height: 6px;
+  background-color: rgb(235,248,231);
+  border-radius: 3px;
+  display: block;
+  position: absolute;
+  transform: scale(0.8);
+
+  margin: auto;
+
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.recycle-input.focus .title {
+  background-color: rgb(60,185,33);
+  color: #fff;
+}
+
+.recycle-input.focus .input{
+  border-bottom: rgb(43,154,66) 2px solid
+}
+
+.recycle-input-time .input-wrapper {
+  display: flex;
+  flex-direction: row;
+
+}
+
+.recycle-input .input {
+  display: inline-block;
+  height: 4vh;
+  margin: 2vh 0;
+  flex-grow: 1;
+  border-bottom: rgb(235,248,231) 2px solid;
+
+  font-size: 4vw;
+  line-height: 4vh;
+
+  color:  rgba(43,154,66,0.2);
+}
+
+.recycle-input.focus .input {
+  color:  rgb(43,154,66);
+}

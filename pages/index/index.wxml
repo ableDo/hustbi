@@ -1,0 +1,48 @@
+<view class="container">
+  <view class="logos">
+    <image src="./logos.png"></image>
+  </view>
+  <view class="point">
+  
+      <view class='point-tip'>{{t["积分值"][l]}}</view>  
+  
+    <view class="point-image-wrapper">
+      <image
+        class='point-image'
+        src='../userpoints/bg_userpoints.png'
+      >
+      </image>
+      <label class="point-label">{{points}}</label>
+    </view>
+
+    <view class="rule" bindtap='viewRule'>
+      <text class="text">{{t["查看积分兑换规则"][l]}}</text>
+    </view>
+  </view>
+  <view class="step" 
+      bindtap='onStepTap'  
+  >
+    <image
+      class='step-image'
+      src='./step.png'
+    >
+    </image>
+
+    <view class="text">{{t["每日步数"][l]}}</view>
+  </view>
+  <view class="entry-nav">
+    <ul class="entry-nav-list">
+      <li class='entry-nav-list-item' wx:for='{{navs}}' id="{{item.id}}" bind:tap="onNavTap" wx:key='{{item.id}}'>
+        <image src='{{item.image}}'></image>
+        <view></view>
+        <label>{{item.title}}</label>
+      </li>
+    </ul>
+  </view>
+  <view class='entry-footer'>
+    <!-- <image class='entry-footer-image' src='./bg_welcome2.png'></image> -->
+    <view class='entry-footer-avatar' bindtap='onUserAvatarTap'>
+      <image src='./icon_user.png'></image>
+    </view>
+  </view>
+</view>

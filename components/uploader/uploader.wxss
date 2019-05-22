@@ -1,0 +1,116 @@
+/* components/uploader.wxss */
+.fly {
+  width: 100%;
+  height: 0;
+  padding-bottom: 19.54%;
+  position: relative;
+}
+
+.fly .image {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
+
+.green-circle-wrapper {
+  width: 19.54%;
+  height: 0;
+  padding-bottom: 19.54%;
+  margin: auto;
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.green-circle {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(58,185,33);
+  border-radius: 50%;
+  transform: scale(1.1)
+}
+
+.dotted-circle {
+  width: 150%;
+  height: 150%;
+  margin: -25%;
+
+  box-sizing: border-box;
+  position: absolute;
+
+  border: dashed 2px rgb(58,185,33);
+  border-radius: 50%;
+}
+
+.green-circle-wrapper .image {
+  margin: auto;
+  transform: scale(0.35)translateY(-20%)
+}
+
+.uploading {
+  width: 75%;
+
+  height: 0;
+  padding-bottom: 32.45%;
+
+  margin: auto;
+  top: -6.45%;
+
+  position: absolute;
+
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  border: 2px dashed #3bb920;
+
+  border-radius: 20rpx;
+}
+
+.uploading .image-to-upload {
+  overflow: hidden;
+
+  background-size: cover;
+
+  background-position: center center;
+
+  background-color: #f1f1f1;
+  border-radius: 20rpx;
+
+  position: absolute;
+  height: 90%;
+  width: 95%;
+  margin: auto;
+
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.uploading .image-to-upload .image {
+  width: 60rpx;
+  height: 60rpx;
+
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+
+  margin: auto;
+
+  transition: opacity 0.2s 0s
+}
+
+.uploading .image-to-upload .uploading-cover {
+  height: 100%;
+  width: 100%;
+
+  background-color: rgba(58,185,33, 0.6);
+
+  transition: transform 0.2s 0s;
+
+  transform-origin: 0 100%;
+}

@@ -1,0 +1,224 @@
+/* pages/userpoints/userpoints.wxss */
+
+.userpoints-bg-wrapper {
+  width: 100%;
+  padding-bottom: 41.48%;
+  height: 0;
+  position: relative;
+}
+
+.userpoints-bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.userpoints-userinfo {
+  width: 100%;
+  padding-bottom: 70%;
+  height: 0;
+  position: relative;  
+}
+
+.userpoints-points-icon-wrapper {
+  width: 30%;
+  padding-bottom: 33.246%;
+  position: absolute;
+  margin: auto;
+
+  height: 0;
+
+  bottom: 20%;
+  right: 0;
+  left: 0;
+
+  /* justify-content: center; */
+}
+
+.userpoints-points-icon-wrapper text {
+  margin: auto;
+  text-align: center;
+  display: block;
+
+
+  position: absolute;
+
+  width: 100%;
+
+
+  height: 100%;
+
+  top: 0;
+  bottom: 0;
+}
+
+.userpoints-points-icon-wrapper .userpoints-number {
+  font-size: 80rpx;
+  height: 120rpx;
+  line-height: 120rpx;
+  color: #2C9A42;
+  font-weight: 100;
+
+}
+
+.userpoints-points-icon-wrapper .userpoints-number-tip {
+  font-size: 26rpx;
+  top: 70rpx;
+
+  color: rgb(44,155,65);
+}
+
+.userpoints-points-icon {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+
+
+.userpoints-rules-linker {
+  height: 60rpx;
+  line-height: 60rpx;   
+  border-bottom: solid 1px rgb(59,185,33);
+  display: inline-block;
+}
+
+.userpoints-rules-linker-wrapper {
+  height: 60rpx;
+  text-align: center;
+
+  position: absolute;
+
+  margin: auto;
+  left: 0;
+  right: 0;
+
+
+  bottom: 3%;
+
+  font-size: 30rpx;
+
+  color: rgb(59,185,33)
+}
+
+.userpoints-inputs {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+
+  /* justify-content: space-around; */
+
+  padding: 8%;
+
+  padding-bottom: 10%;
+
+  /* position: relative; */
+}
+
+.userpoints-inputs .stuff-channel {
+  position: fixed;
+  color: #34CD1B;
+  font-size: 14px;
+
+  bottom: 20px;
+  left: 30px;
+}
+
+.userpoints-input-wrapper {
+  display: flex;
+  flex-direction: row;
+
+  font-size: 32rpx;
+
+  margin: 5px;
+}
+
+.userpoints-input-wrapper.focus .divider {
+  visibility: hidden;
+}
+
+.userpoints-input-wrapper .label {
+  color: rgb(44,154,66);
+
+  height: 72rpx;
+  line-height: 72rpx;
+
+  flex-grow: 1;
+
+  text-align: end;
+}
+
+.userpoints-input-wrapper .divider {
+  width: 6rpx;
+  height: 72rpx;
+
+  margin: 0 30rpx;
+
+  background-color: rgb(46,230,158);
+}
+
+
+.userpoints-input-wrapper.wrong .divider {
+  width: 6rpx;
+  height: 72rpx;
+
+  margin: 0 30rpx;
+
+  background-color: red;
+}
+
+
+.userpoints-input-wrapper input {
+  margin: auto;
+
+  width: 65%;
+
+  height: 60rpx;
+
+  line-height: 60rpx;
+
+  font-size: 32rpx;
+
+  color: rgb(44,154,66);
+
+  border-bottom: 2px solid transparent;
+}
+
+.userpoints-input-wrapper.wrong input {
+  color: red;
+  border-bottom: 2px solid red;
+}
+
+.userpoints-input-wrapper.focus input {
+  color: rgb(26,227,167);
+  border-bottom: 2px solid rgb(46,230,158);
+}
+
+
+
+.float-button {
+  position: fixed;
+  width: 12vw;
+  height: 12vw;
+
+  border-radius: 6vw;
+  background-color: #34CD1B;
+
+  bottom: 10vw;
+  right: 10vw;
+
+  box-shadow:  0px 8px 24px RGBA(52, 205, 27, 0.35)
+}
+
+.float-button image {
+  width: 100%;
+  height: 100%;
+
+  position: absolute;
+
+
+  transform: scale(0.707)
+}
+
+.placeholder {
+  height: 5vw;
+}

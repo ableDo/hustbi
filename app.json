@@ -1,0 +1,21 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/trash/trash",
+    "pages/food-list/food-list",
+    "pages/food-analyze/food-analyze",
+    "pages/clothes/clothes",
+    "pages/food/food",
+    "pages/bus/bus",
+    "pages/steps/steps",
+    "pages/userpoints/userpoints",
+    "pages/recycle/recycle"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#67de50",
+    "navigationBarTitleText": "绿色银行",
+    "navigationBarTextStyle": "black"
+  },
+  "sitemapLocation": "sitemap.json"
+}

@@ -1,0 +1,45 @@
+<view class='steps-step-info'>
+  <view class='step-icon-wrapper'>
+    <view class='step-icon'>
+      <image src='../index/icon_steps.png'></image>
+    </view>
+    <view class='dot'></view>
+    <label>{{t["碳足迹"][l]}}</label>
+  </view>
+
+  <view class='step-number-wrapper'>
+    <view class='step-left-text'>{{t["昨日"][l]}}</view>
+    <view class='step-number'>{{steps}}</view>
+    <view class='step-right-text'>{{t["步"][l]}}</view>
+  </view>
+
+  <view class='step-equal-points'>
+    =
+    <text>{{bonus}}</text>
+    {{t["积分"][l]}}
+  </view>
+  <view class='step-equal-points'>
+    = {{t["减少了"][l]}}
+    <text>{{carbon}}</text>
+    CO2{{t["排放"][l]}}
+  </view>
+</view>
+
+<view class='steps-bg-wrapper'>
+  <image class='steps-bg' src='./bg_steps.png'></image>
+  <view class='steps-navs'>
+    <view class='navs-left-arrow + {{currentPageIndex === 0 ? " disabled" : ""}}' bindtap='onPreviousTap'>
+      <image src='./icon_previous.png'></image>
+    </view>
+    <view class='navs-icons'>
+      <view class='navs-icon' wx:for='{{pages[currentPageIndex]}}' wx:for-index="i">
+        <image bindtap='onNavsIconTap' data-id='{{i}}' src='{{item.src}}'></image>
+        <text bindtap='onNavsIconTap' data-id='{{i}}'>{{item.title}}</text>
+      </view>
+    </view>
+    <view class='navs-right-arrow + {{currentPageIndex === pages.length - 1 ? " disabled" : ""}}' bindtap='onNextTap'>
+      <image src='./icon_next.png'></image>
+    </view>
+  </view>
+</view>
+

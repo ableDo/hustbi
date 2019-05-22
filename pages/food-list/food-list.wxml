@@ -1,0 +1,35 @@
+<!--pages/food-list/food-list.wxml-->
+<!-- <text>pages/food-list/food-list.wxml</text> -->
+<view class="input-wrapper">
+  <input placeholder='请输入食品名称搜索' bindinput='onSearchInput'></input>
+  
+</view>
+
+<scroll-view  scroll-y="true"  class="list" bindscrolltolower="loadMore">
+  <view class="list-item" wx:for="{{foods}}">
+    <view class="left-img">
+      <image src='https://temp.l-do.cn{{item.thumb_image_name}}'></image>
+    </view>
+    <view class="text">
+      <view class="title">{{item.name}}</view>
+      <view class="content">1个</view>        
+    </view>
+    <view class="de {{countMap[item.code] ? '' : 'disabled'}}" id="de_{{item.code}}" data-calory='{{item.calory}}' bindtap='onDeTap'>
+      <view class="line"></view>
+    </view>
+    <view class="amount">{{countMap[item.code] || 0}}</view>
+    <view class="in" id="in_{{item.code}}"  data-calory='{{item.calory}}' bindtap='onInTap'>
+        
+          <view class="v"></view>
+          <view class="h"></view>
+        
+    </view>
+  </view>
+
+  <view class="loading" wx:if="{{page <= totalPage}}">正在加载...</view>
+  <view class="last-list-item" wx:if="{{page === totalPage}}"></view>
+</scroll-view>
+
+<view class="float-button" bindtap='submit'>
+<image src="./yes.png"></image>
+</view>

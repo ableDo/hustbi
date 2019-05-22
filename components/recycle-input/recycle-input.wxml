@@ -1,0 +1,17 @@
+<!--components/recycle-input/recycle-input.wxml-->
+<view class="{{'recycle-input' + (inputFocus ? ' focus' : '')}}">
+    <view class='title'>{{title}}</view>
+    <view class='input-wrapper'>
+      <input
+        value='{{_value}}'
+        style='{{_style}}'
+        maxlength='{{_maxlength || -1}}'
+        type='{{_type || "text"}}'
+        class='input'
+        bindfocus='onInputFocus'
+        bindblur='onInputBlur'
+        bindinput='onInput'
+        placeholder='{{placeholder}}'
+      ></input>
+    </view>
+  </view>

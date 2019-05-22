@@ -1,0 +1,44 @@
+<view class='clothes-root'>
+  <view class='title'>
+    <image src='./icon_cloth.png'></image>
+    <text>衣物捐赠</text>
+  </view>
+</view>
+
+<scroll-view class='clothes-form' scroll-y='true' wx:if='{{step === 0}}'>
+  <view class='clothes-input' wx:for='{{inputData.length}}' wx:for-index='i'>
+    <view class='subtitle'>
+      <text class='cross'>+</text>
+      <text class='text'>衣物{{i + 1}}</text>
+    </view>
+    <recycle-input
+      _value='{{inputData[i][0]}}'
+      _style='width: 200rpx;'
+      title='衣物类型'
+      id='{{2 * i}}'
+      placeholder='衣物类型'
+      bindmyinput='onMyInputClothes'
+    ></recycle-input>
+    <recycle-input
+      _value='{{inputData[i][1]}}'
+      _type='number'
+      _style='width: 50rpx;'
+      title='衣物数量'
+      id='{{2 * i + 1}}'
+      placeholder=''
+      bindmyinput='onMyInputClothes'
+    ></recycle-input>
+  </view>
+</scroll-view>
+
+<scroll-view scroll-y='true' wx:if='{{step === 1}}'>
+  <view class='image-selector' bindtap='{{!images[i] ? "onRequestUpload" : "onEmpty"}}' wx:for-index='i' wx:for='{{images.length + 1}}'>
+    <view style='background-image: url({{images[i]}});'></view>
+    <image wx:if='{{!images[i]}}' src='../../components/uploader/icon_upload.png' class='upload-icon'></image>
+  </view>
+</scroll-view>
+
+
+<view class='bottom-button' bindtap='nextStep'>
+  <text>下一步</text>
+</view>
