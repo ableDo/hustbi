@@ -1,4 +1,5 @@
 <view class="container">
+  <view class='admin' bindtap='onAdminLogin'></view>
   <view class="logos">
     <image src="./logos.png"></image>
   </view>

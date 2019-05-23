@@ -55,5 +55,9 @@ module.exports = c({
   "昨日": "Yesterday",
   "积分": "Point(s)",
   "减少了": "Reduced",
-  "排放": ""
+  "排放": "",
+
+  "查找讨论": "Search",
+  "只看讨论": "Chat Only",
+  "只看动态": "Moments Only",
 })

@@ -10,7 +10,10 @@
     "pages/steps/steps",
     "pages/userpoints/userpoints",
     "pages/recycle/recycle",
-    "pages/forest/forest"
+    "pages/forest/forest",
+    "pages/admin/admin",
+    "pages/forest/create/create",
+    "pages/forest/user/user"
   ],
   "window": {
     "backgroundTextStyle": "light",

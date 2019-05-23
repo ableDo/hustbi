@@ -2,28 +2,49 @@
 <view class='topbar'>
   <view class='container'>
 
-    <view class='user-info'>
-      <image class='user-profile' src='../index/icon_step.png'></image>
-      <view class='user-name'>一位同学</view>
+    <!-- top controller bar -->
+    <view class='nav'>
+      <view class='user-info' bindtap='onUserTap'>
+        <image class='user-profile'></image>
+        <view class='user-name'></view>
+      </view>
+      <!-- view mode -->
+      <view class='function-buttons-wrapper'>
+        <ul class="function-buttons">
+          <li class='function-search' bindtap='onSearchTap'>
+            <image src='./img/sample.png'></image>
+            <view class='topic'>查找讨论</view>
+          </li>
+          <li class="function-chat" bindtap='onChatTap'>
+            <image src='./img/sample.png'></image>
+            <view class='topic'>只看讨论</view>
+          </li>
+          <li class="function-moments" bindtap='onMomentsTap'>
+            <image src='./img/sample.png'></image>
+            <view class='topic'>只看动态</view>
+          </li>
+        </ul>
+      </view>
+      <!-- add new one -->
+      <view class='create'>
+        <image src='./img/sample.png'></image>
+      </view>
     </view>
 
-    <view class='function-bar'>
-      <view class='search' bindtap='onSearchTap'>
-        <image class='search-image' src='../index/icon_step.png'></image>
-        <view class='search-title'>查找讨论</view>
+    <!-- content chat/moments -->
+    <view class='content'>
+      <view class='content-list' wx:for='{{content}}' id="{{item.id}}"
+      bind:tap="onContentTap" wx:key='{{item.id}}'>
+        <view class='author'>author</view>
+        <view class='intro'>intro</view>
+        <view class='bottom-bar'>
+          <view class='time'>time</view>
+          <view class='favor'>
+            <image></image>
+            <label>content</label>
+          </view>
+        </view>
       </view>
-
-      <view class='filter-chat' bindtap='onChatTap'>
-        <image class='chat-image' src='../index/icon_step.png'></image>
-        <view class='chat-title'>只看讨论</view>
-      </view>
-
-      <view class='filter-moments' bindtap='onMomentsTap'>
-      <image class='moments-image' src='../index/icon_step.png'></image>
-      <view class='moments-title'>只看动态</view>
-      </view>
-
-      <view class='send' bindtap='send'></view>
     </view>
   </view>
 </view>

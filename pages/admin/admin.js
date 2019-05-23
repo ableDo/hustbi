@@ -1,26 +1,18 @@
-// pages/forest/forest.js
-
-const s = require("../../utils/store.js")
-const t = require("../../utils/t.js")
-
-
-
-
+// pages/admin/admin.js
 Page({
+
   /**
    * 页面的初始数据
    */
   data: {
-    
+
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    wx.setNavigationBarTitle({
-      title: s("l") === 0 ? "绿色森林" : "Green Forest"
-    })
+
   },
 
   /**
@@ -37,22 +29,6 @@ Page({
 
   },
 
-  onUserTap: function() {
-    wx.navigateTo({
-      url: '/pages/forest/user/user',
-    })
-  },
-
-  onSearchTap: function() {
-
-  },
-
-  onChatTap: function() {
-
-  },
-  onMomentsTap: function() {
-
-  },
   /**
    * 生命周期函数--监听页面隐藏
    */

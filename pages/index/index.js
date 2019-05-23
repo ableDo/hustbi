@@ -43,9 +43,13 @@ Page({
   data: {
     topNavs: genTopNavs(),
     navs: genNavs(),
+    topNavRoutes: {
+      step: '/pages/steps/steps',
+      forest: '/pages/forest/forest'
+    },
     navRoutes: {
       recycle: '/pages/recycle/recycle',
-      steps: '/pages/steps/steps',
+      // steps: '/pages/steps/steps',
       "food-analyze": "/pages/food-analyze/food-analyze",
       trash: "/pages/trash/trash"
       // recycle: '/pages/recycle/recycle',
@@ -106,8 +110,15 @@ Page({
       });
     }
   },
+  onAdminLogin: function(e) {
+    wx.navigateTo({
+      url: '/pages/admin/admin',
+    })
+  },
   onTopNavTap: function(e) {
-    
+    wx.navigateTo({
+      url: this.data.topNavRoutes[e.currentTarget.id],
+    })
   },
   onNavTap: function(e) {
     wx.navigateTo({
@@ -119,17 +130,7 @@ Page({
       url: '/pages/userpoints/userpoints',
     })
   },
-  onStepTap: function() {
-    wx.navigateTo({
-      url: '/pages/steps/steps',
-    })
-  },
-  // tap forest
-  onForestTap: function() {
-    wx.navigateTo({
-      url: '/pages/forest/forest'
-    })
-  },
+  
   onShow() {
     called && app.userInfoReadyCallback && app.userInfoReadyCallback()
   },
