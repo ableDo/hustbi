@@ -19,16 +19,22 @@
       <text class="text">{{t["查看积分兑换规则"][l]}}</text>
     </view>
   </view>
-  <view class="step" 
-      bindtap='onStepTap'  
-  >
+  <view class="step">
     <image
       class='step-image'
       src='./step.png'
+      bindtap='onStepTap'
     >
     </image>
 
-    <view class="text">{{t["每日步数"][l]}}</view>
+    <!-- <view class="text">{{t["每日步数"][l]}}</view> -->
+    <!-- green-forest -->
+    <image
+      class='forest-image'
+      src='./step.png'
+      bindtap='onForestTap'
+    >
+    </image>
   </view>
   <view class="entry-nav">
     <ul class="entry-nav-list">

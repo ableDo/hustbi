@@ -107,7 +107,11 @@ Page({
       url: '/pages/steps/steps',
     })
   },
-
+  onForestTap: function() {
+    wx.navigateTo({
+      url: '/pages/forest/forest'
+    })
+  },
   onShow() {
     called && app.userInfoReadyCallback && app.userInfoReadyCallback()
   },

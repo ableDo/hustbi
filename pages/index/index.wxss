@@ -81,15 +81,16 @@
 
   color: rgb(44,154,66);
 
+  /* justify-content: center; */
   justify-content: center;
 }
 
-.step .text {
+/* .step .text {
   height: 20vw;
   line-height: 20vw;
 
   margin-left: 30px;
-}
+} */
 
 .step-image {
   /* position: absolute; */
@@ -100,6 +101,13 @@
   background-size: cover;
   background-repeat: no-repeat;
   */
+}
+
+/* green-forest configs */
+.forest-image {
+  width: 20vw;
+  height: 20vw;
+  margin-left: 30px;
 }
 
 .entry-nav {

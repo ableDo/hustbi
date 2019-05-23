@@ -9,7 +9,8 @@
     "pages/bus/bus",
     "pages/steps/steps",
     "pages/userpoints/userpoints",
-    "pages/recycle/recycle"
+    "pages/recycle/recycle",
+    "pages/forest/forest"
   ],
   "window": {
     "backgroundTextStyle": "light",
