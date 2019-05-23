@@ -29,6 +29,22 @@ Page({
 
   },
 
+  onSearchTap: function() {
+    // todo
+  },
+
+  onChatTap: function() {
+    // todo
+  },
+
+  onMomentsTap: function() {
+    //todo
+  },
+
+  send: function() {
+    // todo
+  },
+
   /**
    * 生命周期函数--监听页面隐藏
    */

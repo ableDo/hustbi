@@ -10,10 +10,11 @@ function c (obj) {
 module.exports = c({
   "积分值": "My Points",
   "查看积分兑换规则": "View point exchange rules",
+  "绿色森林": "Green Forest",
   "上门回收": "Recycle",
   "饮食分析": "Food Analyze",
   "垃圾分类": "Trash",
-  "每日步数": "Daily Step Count",
+  "每日步数": "Daily Step",
   "宿舍地址": "Dormitory",
   "例如：韵苑X栋": "Like Yunyuan No.X",
   "回收日期": "Recycle Date",

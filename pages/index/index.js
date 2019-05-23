@@ -9,6 +9,18 @@ const t = require("../../utils/t.js")
 const app = getApp()
 let called = false;
 
+const genTopNavs = () => [{
+  image: './icon_steps@3x.png',
+  title: t['每日步数'][s('l')],
+  id: 'step',
+},
+{
+  image: './icon_forest@3x.png',
+  title: t['绿色森林'][s('l')],
+  id: 'forest',
+},
+]
+
 const genNavs = () => [{
   image: './icon_recycle.png',
   title: t['上门回收'][s('l')],
@@ -26,8 +38,10 @@ const genNavs = () => [{
 },
 ]
 
+
 Page({
   data: {
+    topNavs: genTopNavs(),
     navs: genNavs(),
     navRoutes: {
       recycle: '/pages/recycle/recycle',
@@ -92,6 +106,9 @@ Page({
       });
     }
   },
+  onTopNavTap: function(e) {
+    
+  },
   onNavTap: function(e) {
     wx.navigateTo({
       url: this.data.navRoutes[e.currentTarget.id],
@@ -107,6 +124,7 @@ Page({
       url: '/pages/steps/steps',
     })
   },
+  // tap forest
   onForestTap: function() {
     wx.navigateTo({
       url: '/pages/forest/forest'

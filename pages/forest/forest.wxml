@@ -1,2 +1,29 @@
 <!--pages/forest/forest.wxml-->
-<text>pages/forest/forest.wxml</text>
+<view class='topbar'>
+  <view class='container'>
+
+    <view class='user-info'>
+      <image class='user-profile' src='../index/icon_step.png'></image>
+      <view class='user-name'>一位同学</view>
+    </view>
+
+    <view class='function-bar'>
+      <view class='search' bindtap='onSearchTap'>
+        <image class='search-image' src='../index/icon_step.png'></image>
+        <view class='search-title'>查找讨论</view>
+      </view>
+
+      <view class='filter-chat' bindtap='onChatTap'>
+        <image class='chat-image' src='../index/icon_step.png'></image>
+        <view class='chat-title'>只看讨论</view>
+      </view>
+
+      <view class='filter-moments' bindtap='onMomentsTap'>
+      <image class='moments-image' src='../index/icon_step.png'></image>
+      <view class='moments-title'>只看动态</view>
+      </view>
+
+      <view class='send' bindtap='send'></view>
+    </view>
+  </view>
+</view>

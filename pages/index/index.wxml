@@ -19,23 +19,18 @@
       <text class="text">{{t["查看积分兑换规则"][l]}}</text>
     </view>
   </view>
-  <view class="step">
-    <image
-      class='step-image'
-      src='./step.png'
-      bindtap='onStepTap'
-    >
-    </image>
 
-    <!-- <view class="text">{{t["每日步数"][l]}}</view> -->
-    <!-- green-forest -->
-    <image
-      class='forest-image'
-      src='./step.png'
-      bindtap='onForestTap'
-    >
-    </image>
+  <view class="top-nav">
+    <ul class="top-nav-list">
+      <li class='top-nav-list-item' wx:for='{{topNavs}}' id="{{item.id}}"
+      bind:tap="onTopNavTap" wx:key='{{item.id}}'>
+        <image src='{{item.image}}'></image>
+        <view></view>
+        <label>{{item.title}}</label>
+      </li>
+    </ul>
   </view>
+
   <view class="entry-nav">
     <ul class="entry-nav-list">
       <li class='entry-nav-list-item' wx:for='{{navs}}' id="{{item.id}}" bind:tap="onNavTap" wx:key='{{item.id}}'>
