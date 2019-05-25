@@ -1,2 +1,35 @@
 <!--pages/admin/admin.wxml-->
-<text>这是管理员界面</text>
+<view class='admin'>
+  <view class='container'>
+    <view class='icon-bar'>
+      <view class='image-wrapper'>
+        <image src='../index/bg_userpoints.png'></image>
+      </view>
+      <view class='sep'></view>
+      <text>管理员登陆</text>
+    </view>
+
+    <view class='account'>
+      <view class='account-image-wrapper'>
+        <image src='./geren11@2x.png'></image>
+      </view>
+      <text style="{{accountConfig}}">账号</text>
+      <view class='input-wrapper'>
+        <input type='text' id='input-account' maxlength='20' bindfocus='onAccountFocus' bindblur='onAccountBlur' bindinput='getAccount'></input>
+      </view>
+      <!-- <view id='account-replace'></view> -->
+    </view>
+
+    <view class='password'>
+      <view class='password-image-wrapper'>
+        <image src='./suo@2x.png'></image>
+      </view>
+      <text style="{{passwordConfig}}">密码</text>
+      <view class='input-wrapper'>
+        <input type='text' id='password-password' maxlength='20' bindfocus='onPasswordFocus' bindblur='onPasswordBlur' bindinput='getPassword'></input>
+      </view>
+    </view>
+
+    <button bindtap='submit'>登陆</button>
+  </view>
+</view>

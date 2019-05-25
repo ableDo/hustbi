@@ -1,1 +1,86 @@
 /* pages/admin/admin.wxss */
+
+.container {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  flex-direction: column;
+}
+
+.icon-bar {
+  margin-top: 10%;
+  text-align: center;
+}
+.icon-bar .image-wrapper {
+  width: 123px;
+  height: 118px;
+  margin: 0 auto;
+}
+
+.icon-bar .image-wrapper image {
+  width: 100%;
+  height: 100%;
+}
+.icon-bar .sep {
+  height: 18px;
+}
+
+.icon-bar text {
+  line-height: 100%;
+  font-size: 18px;
+  color: #2C9A42;
+}
+
+.account, .password{
+  display: inline-flex;
+  flex-direction: row;
+  margin: 20px 15%;
+  line-height: 20px;
+  
+}
+
+.account {
+  margin-top: 80px;
+}
+
+.account .account-image-wrapper {
+  width: 18px;
+  height: 18px;
+}
+
+.password .password-image-wrapper {
+  width: 18px;
+  height: 21px;
+}
+
+.account image, .password image {
+  width: 100%;
+  height: 100%;
+}
+
+.account text, .password text {
+  margin-left: 10px;
+  font-size: 14px;
+}
+
+
+.input-wrapper {
+  flex: 1;
+  height: 14px;
+  margin-top: -2px;
+}
+
+input {
+  width: 100%;
+  margin-left: 10px;
+  border-bottom: 1px solid #6F6F6F;
+  color: #6F6F6F;
+  font-size: 14px;
+}
+
+button {
+  margin-top: 15%;
+  width: 80%;
+  background-color: #91DE73;
+  color: white;
+}

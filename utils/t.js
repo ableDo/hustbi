@@ -60,4 +60,5 @@ module.exports = c({
   "查找讨论": "Search",
   "只看讨论": "Chat Only",
   "只看动态": "Moments Only",
+  "管理员登陆": "Adimin Login",
 })

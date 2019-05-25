@@ -1,0 +1,52 @@
+/* pages/forest/create/create-page/create-page.wxss */
+
+/* topbar configrations */
+.topbar {
+  display: inline-flex;
+  flex-direction: row;
+  margin-bottom: 30px;
+  padding: 0;
+  width: 100%;
+  height: 100px;
+}
+
+.topbar .image-wrapper {
+  width: 80px;
+  height: 80px;
+  padding: 10px;
+}
+.image-wrapper image {
+  width: 100%;
+  height: 100%;
+  background: #000;
+}
+
+.topbar .title-wrapper { 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.title-wrapper text {
+  font-size: 30px;
+  line-height: 30px;
+}
+
+
+/* content configrations */
+
+.bottom-content {
+  display: flex;
+  flex-direction: column;
+  background: #efefef;
+  height: 100%;
+}
+
+.input-wrapper {
+  padding-top: 5px;
+  background-color: #e4e4e4;
+  width: 95%;
+  height: 50px;
+  margin: 2% auto;
+}

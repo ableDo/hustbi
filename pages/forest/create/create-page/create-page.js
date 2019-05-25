@@ -1,18 +1,28 @@
-// pages/forest/create/create.js
+// pages/forest/create/create-page/create-page.js
+
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    hidden: false,
+    title: '发起讨论',
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+    var that = this;
+
+    if(options.isChatPage == true) {
+      console.log('chat page');
+    } else {
+      console.log('moments page ');
+      that.setData({hidden: true, title: '发布动态'});
+    }
   },
 
   /**
