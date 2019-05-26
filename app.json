@@ -14,7 +14,6 @@
     "pages/admin/admin",
     "pages/forest/create/create",
     "pages/forest/user/user",
-    "pages/forest/create/create-page/create-page",
     "pages/forest/detail/detail"
   ],
   "window": {

@@ -53,22 +53,8 @@ Page({
 
   },
   onCreateTap: function() {
-    wx.showActionSheet({
-      itemList: ['发布动态', '发起讨论'],
-      success: function(res) {
-        if (res.tapIndex === 0) {
-          wx.navigateTo({
-            url: "/pages/forest/create/create-page/create-page?isChatPage=0",
-          })
-        } else if(res.tapIndex === 1) {
-          wx.navigateTo({
-            url: "/pages/forest/create/create-page/create-page?isChatPage=1",
-          })
-        }
-      },
-      fail: function(res) {
-        // 啥也不干
-      }
+    wx.navigateTo({
+      url: '../forest/create/create',
     })
   },
   /**

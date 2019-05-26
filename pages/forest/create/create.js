@@ -5,7 +5,10 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    'maxlength': 1200,
+    'text': '发起讨论',
+    hidden: false,
+    isChat: 1,
   },
 
   /**
@@ -62,5 +65,23 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+
+  onTapChat: function() {
+    var that = this;
+    // if (that.data.isChat === 0) {
+    if (that.data.hidden) {
+      that.setData({'hidden': false});
+      that.setData({'isChat': 1});
+    }
+  },
+
+  onTapMoments: function() {
+    var that = this;
+    // if (that.data.isChat === 1) {
+    if (!that.data.hidden) {
+      that.setData({ 'hidden': true });
+      that.setData({'isChat': 0});
+    }
   }
 })

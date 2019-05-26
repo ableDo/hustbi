@@ -1,2 +1,24 @@
 <!--pages/forest/create/create.wxml-->
-<text>pages/forest/create/create.wxml</text>
+<view class='create'>
+  <view class='container'>
+    <view class='choose-bar'>
+      <!-- <button id='chat' style='{{chatStyle}}' bindtap='onTapChat' >讨论</button> -->
+      <button id='chat' style="{{hidden ? 'background-color: #fff; color:#000' : 'background-color: #91DE73; color: #fff'}}" bindtap='onTapChat' >讨论</button>
+      <button id='moments' style="{{hidden ? 'background-color: #91DE73; color: #fff' : 'background-color: #fff; color:#000'}}" bindtap='onTapMoments'>动态</button>
+    </view>
+    <view class='sep'></view>
+    <view class='content'>
+      <view class='input-topic-wrapper' hidden='{{hidden}}'>
+        <input placeholder="#请输入一个讨论话题#" id='input-topic' ></input>
+      </view>
+      <view class='input-detail-wrapper'>
+        <textarea placeholder='说点什么吧...' id='input-detail' maxlength='{{maxlength}}' auto-height='true'></textarea>
+      </view>
+      <view class='input-image-wrapper'>
+          <image id='image'></image>
+      </view>
+    </view>
+    <button id='submit' wx:if="{{hidden}}">发布讨论</button>
+    <button id='submit' wx:else>发布动态</button>
+  </view>
+</view>
