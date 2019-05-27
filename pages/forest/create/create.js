@@ -7,8 +7,8 @@ Page({
   data: {
     'maxlength': 1200,
     hidden: false,
-    animationData: {},
-    animationDataBody: {},
+    topic: '',
+    content: '',
   },
 
   /**
@@ -75,16 +75,7 @@ Page({
         content: '您当前所做更改将不会得到保存！',
         success: function(res) {
           if (res.confirm) {
-            var animation = wx.createAnimation({
-              duration: 2000,
-              timingFunction: 'ease-in',
-              delay: 0,
-            })
-            animation.translate(0, 0).opacity(1).step();
-            that.setData({animationData: animation.export()});
-            // setTimeout(function() {
               that.setData({ 'hidden': false });
-            // }.bind(this), 1000);
           } 
         }
       })
@@ -99,19 +90,22 @@ Page({
         content: '您当前所做更改将不会得到保存！',
         success: function (res) {
           if (res.confirm) {
-            var animation = wx.createAnimation({
-              duration: 1000,
-              timingFunction: 'ease-in',
-              delay: 0,
-            })
-            animation.translate(0, -100).opacity(0).step();
-            that.setData({ animationData: animation.export() });
-            setTimeout(function () {
-              that.setData({ 'hidden': true });
-            }.bind(this), 1000);
+            that.setData({ 'hidden': true });
           }
         }
       })
     }
+  },
+
+  submit: function() {
+    if (!this.data.hidden && this.data.topic.length === 0) {
+      console.log('wrong!');
+    }
+  },
+  bindTopicInput: function(e) {
+    this.setData({topic: e.detail.value});
+  },
+  bindContentInput: function(e) {
+    this.setData({content: e.detail.value });
   },
 })
