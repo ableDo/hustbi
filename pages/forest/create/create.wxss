@@ -77,16 +77,36 @@
 }
 
 .input-image-wrapper {
-  height: 60px;
+  /* height: 60px; */
   box-shadow: 0 10px 15px #F5F5F5;
 }
 
-.input-image-wrapper #image {
+/* .input-image-wrapper #image {
   background-color: #000;
   height: 40px;
   width: 40px;
   margin: 10px 10px;
+} */
+
+.input-image-wrapper .imgView {
+  width: 40px;
+  margin: 10px 10px;
 }
+
+#imageView {
+  text-align: left;
+  margin-left: 15rpx;
+}
+
+#imageView .no-img {
+  width: 230rpx;
+  height: 230rpx;
+  margin-right: 15rpx;
+}
+#imageView .sel-img {
+  display: inline-block;
+}
+
 
 #submit {
   margin-top: 25px;
