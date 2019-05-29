@@ -3,48 +3,70 @@
   <view class='container'>
 
     <!-- top controller bar -->
-    <view class='nav'>
+    <view class='nav' id='navbar'>
+      <!-- user-info -->
       <view class='user-info' bindtap='onUserTap'>
         <image class='user-profile'></image>
         <view class='user-name'></view>
       </view>
-      <!-- view mode -->
-      <view class='function-buttons-wrapper'>
-        <ul class="function-buttons">
-          <li class='function-search' bindtap='onSearchTap'>
-            <image src='./img/sample.png'></image>
-            <view class='topic'>查找讨论</view>
-          </li>
-          <li class="function-chat" bindtap='onChatTap'>
-            <image src='./img/sample.png'></image>
-            <view class='topic'>只看讨论</view>
-          </li>
-          <li class="function-moments" bindtap='onMomentsTap'>
-            <image src='./img/sample.png'></image>
-            <view class='topic'>只看动态</view>
-          </li>
-        </ul>
+
+      <!-- search -->
+      <view class='search' bindtap='onSearchTap'>
+        <view class='image-wrapper'>
+          <image src="{{search ? './img/search-green.png' : './img/search.png'}}"></image>
+        </view>
+        <view class='topic' style="{{search ? 'color:#91DE73' : 'color:#000'}}">查找讨论</view>
       </view>
+
+      <!-- chat -->
+      <view class="chat" bindtap='onChatTap'>
+        <view class='image-wrapper'>
+          <image src="{{chat ? './img/chat-green.png' : './img/chat.png'}}"></image>
+        </view>
+        <view class='topic' style="{{chat ? 'color:#91DE73' : 'color:#000'}}">只看讨论</view>
+      </view>
+
+      <!-- moments -->
+      <view class="moments" bindtap='onMomentsTap'>
+        <view class='image-wrapper'>
+          <image src="{{moments ? './img/moments-green.png' : './img/moments.png'}}"></image>
+        </view>
+        <view class='topic' style="{{moments ? 'color:#91DE73' : 'color:#000'}}">只看动态</view>
+      </view>
+
       <!-- add new one -->
       <view class='create' bindtap='onCreateTap'>
-        <image src='./img/sample.png'></image>
+        <view class='image-wrapper'>
+          <image src='./img/create.png'></image>
+        </view>
       </view>
     </view>
+    
 
     <!-- content chat/moments -->
     <view class='content'>
-      <view class='content-list' wx:for='{{content}}' id="{{item.id}}"
-      bind:tap="onContentTap" wx:key='{{item.id}}'>
-        <view class='author'>author</view>
-        <view class='intro'>intro</view>
-        <view class='bottom-bar'>
-          <view class='time'>time</view>
-          <view class='favor'>
-            <image></image>
-            <label>content</label>
-          </view>
-        </view>
-      </view>
+      <scroll-view class='sections' scroll-y='true' style="height:{{scrollerViewHeight}}px">
+        <view>sample1</view>
+        <view>sample2</view>
+        <view>sample3</view>
+        <view>sample4</view>
+        <view>sample5</view>
+        <view>sample6</view>
+        <view>sample7</view>
+        <view>sample8</view>
+        <view>sample9</view>
+        <view>sample10</view>
+        <view>sample11</view>
+        <view>sample12</view>
+        <view>sample13</view>
+        <view>sample14</view>
+        <view>sample15</view>
+        <view>sample16</view>
+        <view>sample17</view>
+        <view>sample18</view>
+        <view>sample19</view>
+        <view>sample10</view>
+      </scroll-view>
     </view>
   </view>
 </view>

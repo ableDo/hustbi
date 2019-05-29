@@ -5,16 +5,19 @@ Page({
    * 页面的初始数据
    */
   data: {
+    // max length of input text
     'maxlength': 1200,
+    // if the topic box is shown
     hidden: false,
+    // topic input
     topic: '',
+    // content input
     content: '',
-
-    // 上传的案例图片集合
+    // pics to be submitted
     uploadImages: [],
-    // 设置上传案例图片的最大数目
+    // max submitted number
     maxImages: 9,
-    // 案例图片数目是否达到了最大数目
+    // if the number to be uploaded reached the max numeber
     isMaxImagesNum: false,
   },
 
@@ -74,6 +77,7 @@ Page({
 
   },
 
+  // switch chat page
   onTapChat: function() {
     var that = this;
     if (that.data.hidden) {
@@ -89,6 +93,7 @@ Page({
     }
   },
 
+  // switch moments page
   onTapMoments: function() {
     var that = this;
     if (!that.data.hidden) {
@@ -104,9 +109,10 @@ Page({
     }
   },
 
+  // submit
   submit: function() {
     if (!this.data.hidden && this.data.topic.length === 0) {
-      
+      // 懒得写了现在
     }
   },
   bindTopicInput: function(e) {
@@ -117,18 +123,18 @@ Page({
   },
 
 
-  // 选择图片
+  // choose pictures
   chooseImageTap: function () {
-    let _this = this;
+    let that = this;
     wx.showActionSheet({
       itemList: ['从相册中选择', '拍照'],
       itemColor: "#f7982a",
       success: function (res) {
         if (!res.cancel) {
           if (res.tapIndex == 0) {
-            _this.chooseWxImage('album')
+            that.chooseWxImage('album')
           } else if (res.tapIndex == 1) {
-            _this.chooseWxImage('camera')
+            that.chooseWxImage('camera')
           }
         }
       }
@@ -137,30 +143,30 @@ Page({
 
   // 选图
   chooseWxImage: function (type) {
-    let _this = this;
+    let that = this;
     var picsItems;
     wx.chooseImage({
       // 相关属性设置
-      count: _this.data.maxImages,
+      count: that.data.maxImages,
       sizeType: ['original', 'compressed'],
       sourceType: [type],
       success: function (res) {
         var imgsrc = res.tempFilePaths;
         // concat数组连接，且不会改变现有数组
-        var picss = _this.data.uploadImages.concat(imgsrc);
+        var picss = that.data.uploadImages.concat(imgsrc);
         var imagesArr = '';
-        if (picss.length >= _this.data.maxImages) {
-          _this.setData({
+        if (picss.length >= that.data.maxImages) {
+          that.setData({
             isMaxImagesNum: true
           });
         }
         // 判断选择的数量是否超过设定数量
-        let num = picss.length <= _this.data.maxImages ? picss.length : _this.data.maxImages;
+        let num = picss.length <= that.data.maxImages ? picss.length : that.data.maxImages;
         for (var i = 0; i < num; i++) {
           imagesArr += '{"imgurl":"' + picss[i] + '"},';
         }
         imagesArr = JSON.parse('[' + imagesArr.substring(0, imagesArr.length - 1) + ']');
-        _this.setData({
+        that.setData({
           uploadImages: picss,
           picsItems: imagesArr
         });
@@ -170,7 +176,7 @@ Page({
 
   // 预览所选图片
   selImagePre: function (e) {
-    let _this = this;
+    let that = this;
     wx.previewImage({
       urls: this.data.uploadImages,
       current: e.currentTarget.dataset.src

@@ -10,7 +10,14 @@ Page({
    * 页面的初始数据
    */
   data: {
-    
+    chat: false,
+    search: false,
+    moments: false,
+    total: true,
+
+    windowHeight: 0,
+    navbarHeight: 0,
+    scrollerViewHeight: 0,
   },
 
   /**
@@ -19,7 +26,28 @@ Page({
   onLoad: function (options) {
     wx.setNavigationBarTitle({
       title: s("l") === 0 ? "绿色森林" : "Green Forest"
-    })
+    });
+
+    let that = this;
+    // get window height
+    wx.getSystemInfo({
+      success: function(res) {
+        that.setData({
+          windowHeight: res.windowHeight
+        })
+      },
+    });
+    // get navbar height
+    let query = wx.createSelectorQuery();
+    query.select('#navbar').boundingClientRect();
+    query.exec((res) => {
+      let navbarHeight = res[0].height;
+      let scrollViewHeight = that.data.windowHeight - navbarHeight;
+      that.setData({
+        scrollerViewHeight: scrollViewHeight
+      });
+    });
+    
   },
 
   /**
@@ -43,18 +71,58 @@ Page({
   },
 
   onSearchTap: function() {
-
+    let that = this;
+    if (!that.data.search) {
+      that.setData({
+        search: true,
+        chat: false,
+        moments: false,
+        total: false,
+      });
+    } else {
+      that.setInitState();
+    }
   },
 
   onChatTap: function() {
-
+    let that = this;
+    if (!that.data.chat) {
+      that.setData({
+      search: false,
+      chat: true,
+      moments: false
+      });
+    } else {
+      that.setInitState();
+    } 
   },
-  onMomentsTap: function() {
 
+  onMomentsTap: function() {
+    let that = this;
+    if (!that.data.moments) {
+       that.setData({
+      search: false,
+      chat: false,
+      moments: true
+      });
+    } else {
+      that.setInitState();
+    }
+   
   },
   onCreateTap: function() {
     wx.navigateTo({
       url: '../forest/create/create',
+    })
+  },
+
+  setInitState: function() {
+    let that = this;
+    that.setData({
+      search: false,
+      chat: false,
+      moments: false,
+      total: true,
     })
   },
   /**

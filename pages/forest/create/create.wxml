@@ -23,7 +23,6 @@
         </view>
 
         <view class='input-image-wrapper'>
-            <!-- <image id='image'></image> -->
           <view id='imageView'>
             <block wx:for="{{picsItems}}" wx:key="id">
               <image class="no-img sel-img" src="{{item.imgurl}}"     catchtap='selImagePre'></image>

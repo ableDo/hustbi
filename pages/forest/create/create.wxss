@@ -77,16 +77,9 @@
 }
 
 .input-image-wrapper {
-  /* height: 60px; */
   box-shadow: 0 10px 15px #F5F5F5;
 }
 
-/* .input-image-wrapper #image {
-  background-color: #000;
-  height: 40px;
-  width: 40px;
-  margin: 10px 10px;
-} */
 
 .input-image-wrapper .imgView {
   width: 40px;
@@ -115,3 +108,4 @@
   background-color: #91DE73;
   color: #fff;
 }
+
