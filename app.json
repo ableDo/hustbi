@@ -14,13 +14,16 @@
     "pages/admin/admin",
     "pages/forest/create/create",
     "pages/forest/user/user",
-    "pages/forest/detail/detail"
+    "pages/forest/detail/detail",
+    "pages/forest/admin/admin",
+    "pages/forest/admin/warn",
+    "pages/forest/detail/moment"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#67de50",
     "navigationBarTitleText": "绿色银行",
-    "navigationBarTextStyle": "black"
+    "navigationBarTextStyle": "white"
   },
   "sitemapLocation": "sitemap.json"
 }

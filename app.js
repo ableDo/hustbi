@@ -12,6 +12,7 @@ App({
           title: '登录成功',
         })
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
+    
         wx.request({
           method: "POST",
           url: store('url'),
@@ -23,7 +24,6 @@ App({
             if (res.statusCode === 200) {
               if (res.data.data.addUser.userId) {
                 store("userId", res.data.data.addUser.userId)
-
                 if (this.userInfoReadyCallback) {
                   this.userInfoReadyCallback()
                 } else {
@@ -57,5 +57,5 @@ App({
   },
   globalData: {
     userInfo: null
-  }
+  },
 })

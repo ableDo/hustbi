@@ -1,0 +1,52 @@
+<!--pages/forest/detail/moment.wxml-->
+<!--pages/forest/detail/detail.wxml-->
+<view class='detail-page'>
+  <view class='container'>
+    <view class='author-block'>
+      <view class='topbar'>
+        <view class='profile-wrapper'>
+          <image  src='../img/profile-1.png'></image>
+        </view>
+        <view class='author'>{{dataBean.user_name}}</view>
+      </view>
+      <view class='content'>{{dataBean.trend_content}}</view>
+      <view class='image-view' wx:for="{{pictures}}">
+        <view class='image-wrapper'>
+          <image src="{{pictures[index]}}" mode='aspectFit'></image>
+        </view>
+      </view>
+      <view class='info-bar'>
+        <view class='time'>{{dataBean.trend_time}}</view>
+        <view class='warn-icon-wrapper' bindtap='onTapWarn'>
+          <image src='../img/warn.png'></image>
+        </view>
+        <view class='favor-icon-wrapper' bindtap='onTapFavor'>
+          <image src="{{dataBean.state ? '../img/favored.png' : '../img/unfavored.png'}}"></image>
+        </view>
+        <view class='agree-num'>{{item.favor_num ? item.favor_num : 0}}个赞</view>
+      </view>
+    <!-- </view> -->
+
+    <view id='chat-block' >
+      <view class='item-wrapper' wx:for="{{chat}}">
+        <view class='upper'>
+          <view class='name'>
+            <text>{{item.user_name}}：</text>
+            <text>{{item.comment_content}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+ </view>
+    <view class='bottom-bar'>
+      <view class='input-wrapper'>
+        <input class='submit' bindinput='getInput' placeholder='添加一个评论' value='{{content}}'></input>
+        <view class='submit-icon-wrapper' bindtap='submit'>
+          <image src='../img/send.png'></image>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+

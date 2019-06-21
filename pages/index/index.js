@@ -59,7 +59,6 @@ Page({
     l: s("l")
   },
   onLoad: function() {
-
     wx.setNavigationBarTitle({
       title: s("l") === 0 ? "绿色银行" : "Green Bank"
     })
@@ -88,7 +87,6 @@ Page({
             })
             return;
           }
-
           const { name, studentId } = res.data.data.user
           if (!name) {
             this.onUserAvatarTap();
@@ -98,15 +96,13 @@ Page({
             })
             s('isFirst', true);            
           } else {
-
             s('isFirst', false);
             s('isStuff', !studentId);
           }
-
           this.setData({
             points: res.data.data.user.bonus.points
           })
-        }
+        },
       });
     }
   },

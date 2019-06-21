@@ -1,4 +1,4 @@
-@import './animate.wxss';
+@import "../../../utils/animate.wxss";
 
 .container {
   display: flex;
@@ -109,3 +109,10 @@
   color: #fff;
 }
 
+#words {
+  color: #91DE73;
+  font-size: 14px;
+  margin-top: 20px;
+  float: right;
+  margin-right: 10%;
+}

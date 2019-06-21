@@ -2,6 +2,8 @@
 const s = require("../../utils/store.js")
 const t = require("../../utils/t.js")
 
+const check = require("../../utils/password.js")
+
 const baseurl = 'https://134.175.25.93:3001/api/login';
 Page({
 
@@ -92,32 +94,19 @@ Page({
 
   // 提交数据
   submit: function() {
-    var account = this.data.account;
-    var password = this.data.password;
     var that = this;
-    wx.request({
-      url: baseurl,
-      header: {
-        'Content-Type': 'application/json'
-      },
-      method: "POST",
-      data: {
-        "user_name": account,
-        "password": password
-      },
-      complete: function(res) {
-        console.log(res);
-        if (res.data === 200) {
-          that.showMessage('登陆成功', 'success', 1000);
-        } else if (res.data === 303) {
-          that.showMessage('用户名不存在', 'fail', 1000);
-        } else if (res.data === 304) {
-          that.showMessage('密码错误', 'fail', 1000);
-        } else {
-          that.showMessage('未知错误', 'fail', 1000);
-        }
-      }
-    })
+    if (check(that.data.accountInput, that.data.passwordInput)) {
+      wx.showToast({
+        title: '登陆成功',
+      })
+      wx.navigateTo({
+        url: '../forest/admin/admin?isStuff=1',
+      })
+    } else {
+      wx.showToast({
+        title: '登陆失败',
+      })
+    }
 
   },
 

@@ -91,6 +91,23 @@ Page({
     wx.showLoading({
       title: '正在加载',
     })
+    let tmp = JSON.stringify({
+      query: `
+        query {
+          user(userId: "${s('userId')}") {
+            id,
+		        userId,
+		        name,
+		        phone,
+		        dorm,
+            bonus {
+            	points
+  	        },
+		        college,
+		        studentId,
+          }
+        }`
+    });
     wx.request({
       url: s("url"),
       method: "POST",
@@ -119,6 +136,10 @@ Page({
           })
           return;
         }
+        console.log(res.data);
+        if (!res.data.data.user) {
+          res.data.data.user = {};
+        }
         this.setData({
           formData: {
             name: res.data.data.user.name,
@@ -128,11 +149,14 @@ Page({
             college: res.data.data.user.college
           }
         })
-
+        if (!res.data.data.user.bonus) {
+          res.data.data.user.bonus = {};
+          res.data.data.user.bonus.points = '';
+        }
         this.setData({
           points: res.data.data.user.bonus.points
         })
-
+        console.log(this.data.formData.studentId);
         wx.hideLoading()
       }
     })

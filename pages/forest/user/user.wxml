@@ -1,2 +1,96 @@
-<!--pages/forest/user/user.wxml-->
-<text>pages/forest/user/user.wxml</text>
+
+<view class='topbar'>
+  <view class='container'>
+
+    <!-- top controller bar -->
+    <view class='nav' id='navbar' hidden="{{hidden}}">
+      <!-- user-info -->
+      <view class='user-info'>
+        <view class='image-wrapper'>
+          <image src="../img/foot.png"></image>
+        </view>
+        <text>与我相关\n {{posts.length}}个</text>  
+      </view>
+
+      <!-- search -->
+      <view class='search' bindtap='onSearchTap'>
+        <view class='image-wrapper'>
+          <image src='../img/search.png'></image>
+        </view>
+        <view class='topic' style="color:#000">查找讨论</view>
+      </view>
+
+      <!-- chat -->
+      <view class="chat" bindtap='onChatTap'>
+        <view class='image-wrapper'>
+          <image src="{{chat ? '../img/chat-green.png' : '../img/chat.png'}}"></image>
+        </view>
+        <view class='topic' style="{{chat ? 'color:#91DE73' : 'color:#000'}}">只看讨论</view>
+      </view>
+
+      <!-- moments -->
+      <view class="moments" bindtap='onMomentsTap'>
+        <view class='image-wrapper'>
+          <image src="{{moments ? '../img/moments-green.png' : '../img/moments.png'}}"></image>
+        </view>
+        <view class='topic' style="{{moments ? 'color:#91DE73' : 'color:#000'}}">只看动态</view>
+      </view>
+
+
+    </view>
+
+      <view class='search-animate-wrapper' hidden='{{!search}}'>
+        <view class='back-button-wrapper' bindtap='back'>
+          <image src='../img/back.png'></image>
+        </view>
+        <view class='input-wrapper'>
+          <input placeholder='搜索你想看的内容～' bindinput='getSearchInput'></input>
+        </view>
+        <view class='search-button-wrapper'>
+          <image src='../img/search-full.png' bindtap='search'></image>
+        </view>
+      </view>
+      <view id='refresh' hidden='{{unrefreshing}}'>
+       <view class='word'>刷新中...</view>
+      </view>
+    <!-- content chat/moments -->
+    <view class='content'>
+      <scroll-view class='section' scroll-y='true' style="height:{{scrollerViewHeight}}px" scroll-top='{{scrollTop}}' bindscrolltoupper="onScrollToUpper">
+        <view class='card' bindtap='onTapCertainCard' data-item="{{item}}" wx:for="{{posts}}" hidden='{{item.type}}'>
+          <movable-area id="move-area">
+            <movable-view id='move-view' direction='horizontal' x='{{item.xmove}}' bindtouchstart='handleTouchStart' bindtouchend='handleTouchEnd' bindchange='handleMoveableChange' data-postsIndex='{{index}}'>
+              <view class='main'>
+                <view class='top-section'>
+                  <view class='author'>{{item.user_name}}</view>
+                  <view class='type-icon-wrapper'>
+                    <image src="{{item.is_trend == 1 ? '../img/moments-green.png' : '../img/chat-green.png'}}"></image>
+                  </view>
+                </view>
+                <view class='sum'>{{item.trend_content}}</view>
+                <!-- 接口给反了，所以我反着写 -->
+                <image src="http://134.175.25.93:3001/img/{{item.firstimg}}" id='include-image' mode='aspectFill'></image>
+              
+                <view class='bottom-section'>
+                  <view class='time'>{{item.trend_time}}</view>
+                  <view class='agree-icon-wrapper' >
+                    <image src="{{item.state ? '../img/favored.png' : '../img/unfavored.png'}}" catchtap='onTapFavor' data-item="{{index}}"></image>
+                  </view>
+                  <view class='agree-num'>{{item.favor_num}}个赞</view>
+                </view>
+              </view>
+              <view class='del'>
+               <view class='del-image-wrapper' catchtap='onTapDelete' data-deleteIndex='{{index}}'>
+                <image src='../img/delete.png'></image>
+               </view>
+              </view>
+            </movable-view>
+          </movable-area>
+        </view>
+
+        <view id='float-button-wrapper' bindtap='onTapScrollToTop'>
+          <image id='float-button' src='../img/top.png'></image>
+        </view>
+      </scroll-view>
+    </view>
+  </view>
+</view>

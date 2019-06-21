@@ -1,4 +1,10 @@
 // pages/forest/create/create.js
+
+const baseUrl = 'http://134.175.25.93:3001/api'
+
+const s = require("../../../utils/store.js")
+const t = require("../../../utils/t.js")
+
 Page({
 
   /**
@@ -13,19 +19,39 @@ Page({
     topic: '',
     // content input
     content: '',
+    // is trend
+    is_trend: 0,
     // pics to be submitted
     uploadImages: [],
     // max submitted number
     maxImages: 9,
     // if the number to be uploaded reached the max numeber
     isMaxImagesNum: false,
+
+    formData: {},
+
+    pictureNames: '',
+
+    steps: 0,
+    bonus: 0,
+    carbon: 0,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+    wx.setNavigationBarTitle({
+      title: s("l") === 0 ? "发布" : "Post"
+    });
+
+    var o = JSON.parse(options.formData);
+    this.setData({
+      formData:{
+        studentId: o.studentId,
+        name: o.name,
+      }
+    });
   },
 
   /**
@@ -83,11 +109,17 @@ Page({
     if (that.data.hidden) {
       wx.showModal({
         title: '提示',
-        content: '您当前所做更改将不会得到保存！',
+        content: '您当前所做更改可能丢失！',
         success: function(res) {
+          console.log('wh');
           if (res.confirm) {
-              that.setData({ 'hidden': false });
-          } 
+            that.setData({
+              'hidden': false,
+              content: '',
+              topic: '',
+              is_trend: 0,
+            });
+          }
         }
       })
     }
@@ -102,7 +134,12 @@ Page({
         content: '您当前所做更改将不会得到保存！',
         success: function (res) {
           if (res.confirm) {
-            that.setData({ 'hidden': true });
+            that.setData({
+               'hidden': true,
+               content: '',
+               topic: '',
+               is_trend: 1,
+            });
           }
         }
       })
@@ -111,9 +148,54 @@ Page({
 
   // submit
   submit: function() {
-    if (!this.data.hidden && this.data.topic.length === 0) {
-      // 懒得写了现在
+    var that = this;
+    if (!that.data.topic.length && !that.data.content.length || !that.data.is_trend && !that.data.topic.length) {
+      wx.showToast({
+        title: '不能发表空内容',
+        icon: 'none',
+      })
+      return;
     }
+    if (that.data.uploadImages.length !== 0) {
+      // 有图片
+      that.uploadImagesOneByOne(that.data.uploadImages, 0, 0, 0, that.data.uploadImages.length);
+      return;
+    }
+    that.onImageLoadedFinished();
+  },
+
+
+  onImageLoadedFinished: function() {
+    let that = this;
+    wx.request({
+      url: baseUrl + '/trends',
+      method: "POST",
+      header: {
+        'content-type': 'application/json'
+      },
+      data: {
+        user_id: that.data.formData.studentId,
+        user_name: that.data.formData.name,
+        trend_picture: that.data.pictureNames,
+        trend_content: that.data.content,
+        is_trend: that.data.is_trend,
+        argue_topic: '#' + that.data.topic + '#'
+      },
+      success: (res) => {
+        if (res.statusCode !== 200) {
+          wx.showToast({
+            title: '网络错误',
+          });
+          wx.navigateTo({
+            url: '../forest',
+          })
+          return;
+        }
+        wx.navigateTo({
+          url: '../forest',
+        })
+      }
+    })
   },
   bindTopicInput: function(e) {
     this.setData({topic: e.detail.value});
@@ -143,7 +225,7 @@ Page({
 
   // 选图
   chooseWxImage: function (type) {
-    let that = this;
+    var that = this;
     var picsItems;
     wx.chooseImage({
       // 相关属性设置
@@ -183,4 +265,66 @@ Page({
     })
   },
 
+  uploadImagesOneByOne: function(imagePaths, successUp, failUp, count, length) {
+    var that = this;
+    wx.showLoading({
+      title: '正在上传第' + count + '张',
+    });
+   
+    wx.uploadFile({
+      url: 'http://134.175.25.93:3001/img/',
+      filePath: imagePaths[count],
+      name: 'image',
+      header: {
+        'content-type': 'multipart/form-data',
+      },
+      success: function(e) {
+        successUp++;
+        let str = JSON.parse(e.data);
+        let picName = str.data;
+        let baseStr = '';
+        if (successUp < length) {
+          baseStr = that.data.pictureNames + picName + ';';
+        } else {
+          baseStr = that.data.pictureNames + picName;
+        }
+        that.setData({
+          pictureNames: baseStr
+        });
+
+      },
+      failUp: function(e) {
+        failUp++;
+      },
+      complete: function(e) {
+        count++;
+        if (count == length) {
+          wx.showToast({
+            title: '上传成功' + successUp + '张',
+            icon: 'success',
+            duration: 2000
+          });
+          that.onImageLoadedFinished();
+        } else {
+          //递归调用，上传下一张
+          that.uploadImagesOneByOne(imagePaths, successUp, failUp, count, length);
+        }
+      }
+    })
+  },
+  generateStepPic: function() {
+   wx.showToast({
+     title: '施工中',
+     icon: null,
+   })
+ 
+  },
+
+  clearAll: function() {
+    this.setData({
+      topic: '',
+      content: '',
+      uploadImages: []
+    })
+  },
 })
