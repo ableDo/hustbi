@@ -1,4 +1,4 @@
-// pages/forest/detail/detail.js
+// pages/forest/detail/discussion.js
 // 讨论
 const picUrl = 'http://134.175.25.93:3001/img/'
 const baseUrl = 'http://134.175.25.93:3001/api'
