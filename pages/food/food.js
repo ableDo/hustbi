@@ -69,7 +69,6 @@ Page({
     wx.chooseImage({
       count: 1,
       success: (res) => {
-        console.log(res)
         this.setData({
           imagePath: res.tempFilePaths[0],
         })

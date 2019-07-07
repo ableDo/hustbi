@@ -136,7 +136,6 @@ Page({
           })
           return;
         }
-        console.log(res.data);
         if (!res.data.data.user) {
           res.data.data.user = {};
         }
@@ -156,7 +155,6 @@ Page({
         this.setData({
           points: res.data.data.user.bonus.points
         })
-        console.log(this.data.formData.studentId);
         wx.hideLoading()
       }
     })

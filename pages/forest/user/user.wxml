@@ -9,7 +9,7 @@
         <view class='image-wrapper'>
           <image src="../img/foot.png"></image>
         </view>
-        <text>与我相关\n {{posts.length}}个</text>  
+        <text>与我相关\n {{posts ? posts.length : 0}}个</text>  
       </view>
 
       <!-- search -->
@@ -21,7 +21,7 @@
       </view>
 
       <!-- chat -->
-      <view class="chat" bindtap='onChatTap'>
+      <view class="chat" bindtap='onDiscussionTap'>
         <view class='image-wrapper'>
           <image src="{{chat ? '../img/chat-green.png' : '../img/chat.png'}}"></image>
         </view>
@@ -29,7 +29,7 @@
       </view>
 
       <!-- moments -->
-      <view class="moments" bindtap='onMomentsTap'>
+      <view class="moments" bindtap='onTrendTap'>
         <view class='image-wrapper'>
           <image src="{{moments ? '../img/moments-green.png' : '../img/moments.png'}}"></image>
         </view>

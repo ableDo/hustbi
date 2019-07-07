@@ -168,7 +168,6 @@ Page({
   },
 
   onNavsIconTap: function(e) {
-    console.log(this.data.pages[this.data.currentPageIndex][e.target.dataset.id])
     wx.navigateTo({
       url: this.data.pages[this.data.currentPageIndex][e.target.dataset.id].url || '',
       success: function(res) {},

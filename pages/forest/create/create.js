@@ -1,6 +1,6 @@
 // pages/forest/create/create.js
 
-const baseUrl = 'http://134.175.25.93:3001/api'
+const baseUrl = 'https://temp.l-do.cn'
 
 const s = require("../../../utils/store.js")
 const t = require("../../../utils/t.js")
@@ -168,7 +168,7 @@ Page({
   onImageLoadedFinished: function() {
     let that = this;
     wx.request({
-      url: baseUrl + '/trends',
+      url: baseUrl + '/api/trends',
       method: "POST",
       header: {
         'content-type': 'application/json'
@@ -272,7 +272,7 @@ Page({
     });
    
     wx.uploadFile({
-      url: 'http://134.175.25.93:3001/img/',
+      url: baseUrl + '/img/',
       filePath: imagePaths[count],
       name: 'image',
       header: {
@@ -313,11 +313,127 @@ Page({
     })
   },
   generateStepPic: function() {
-   wx.showToast({
-     title: '施工中',
-     icon: null,
-   })
- 
+    let that = this;
+    wx.showLoading({
+      title: '保存中',
+    })
+    that.getStep();
+    console.log('111');
+  },
+  getStep: function() {
+    const self = this;
+    wx.login({
+      success: function (res) {
+        if (res.code) {
+          wx.request({
+            url: baseUrl + "/api/auth/login",
+            method: 'POST',
+            data: {
+              code: res.code
+            },
+            success: function (res) {
+              console.log(res.data.data.session_key)
+              s("session_key", res.data.data.session_key)
+              self.getWeRunData();
+            }
+          })
+        }
+      }
+    });
+
+  },
+  getWeRunData: function () {
+    wx.getSetting({
+      success: function (res) {
+        if (res.authSetting['scope.werun'] === false) {
+          wx.showModal({
+            title: '提示',
+            content: '请开启获取微信步数权限',
+            showCancel: false,
+            confirmText: '知道了'
+          })
+        } else {
+          wx.authorize({
+            scope: 'scope.werun',
+            success() {
+              wx.getWeRunData({
+                success: function (res) {
+                  wx.request({
+                    url: baseUrl + "/api/getwerundata",
+                    method: 'POST',
+                    header: {
+                      "accept": "application/json",
+                    },
+                    data: {
+                      encryptedData: res.encryptedData,
+                      iv: res.iv,
+                      session_key: s("session_key")
+                    },
+                    success: function (res) {
+                      var step = res.data.data.stepnum
+                      const ctx = wx.createCanvasContext('step');
+                      //绘制背景图
+                      ctx.drawImage('../img/test.png', 0, 0, 375, 600);
+                      
+                      ctx.save();
+                      
+
+                      ctx.restore();
+                      //绘制文字
+                      ctx.setTextAlign('center')
+                      ctx.setFillStyle('#57A838')
+                      ctx.setFontSize(30)
+                      ctx.fillText(step, 166, 426)//用户昵称
+                      ctx.stroke()
+                      ctx.draw()
+                      wx.canvasToTempFilePath({
+                        x: 0,
+                        y: 0,
+                        width: 375,
+                        height: 600,
+                        canvasId: 'step',
+                        success: function (res) {
+                          let tempFilePath = res.tempFilePath;
+                          wx.saveImageToPhotosAlbum({
+                            filePath: tempFilePath,//canvasToTempFilePath返回的tempFilePath
+                            success: (res) => {
+                              console.log(res)
+                              wx.hideLoading();
+                            },
+                            fail: (err) => {
+                              console.log(err)
+                              wx.hideLoading();
+                            }
+                          })
+                        }
+                      })
+                    }
+                  })
+                },
+                fail: function (res) {
+                  wx.showModal({
+                    title: '提示',
+                    content: '请先关注“微信运动”公众号并设置数据来源，以获取并提供微信步数数据',
+                    showCancel: false,
+                    confirmText: '知道了'
+                  })
+                  return;
+                }
+              })
+            },
+            fail() {
+              wx.showModal({
+                title: '提示',
+                content: '请开启获取微信步数权限',
+                showCancel: false,
+                confirmText: '知道了'
+              })
+            }
+          })
+        }
+      }
+    })
+
   },
 
   clearAll: function() {

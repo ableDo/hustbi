@@ -4,8 +4,7 @@ const s = require("../../../utils/store.js")
 const t = require("../../../utils/t.js")
 
 
-const baseUrl = 'http://134.175.25.93:3001/api'
-const picUrl = 'http://134.175.25.93:3001/img/'
+const baseUrl = 'https://temp.l-do.cn'
 
 Page({
 
@@ -58,7 +57,6 @@ Page({
     this.setData({
       formData: JSON.parse(src),
     })
-    console.log(this.data.formData);
     if (options.isStuff) {
       this.setData({
         isStuff: true,
@@ -137,7 +135,7 @@ Page({
   },
 
   // 只看讨论 trend 0动态  
-  onChatTap: function () {
+  onDiscussionTap: function () {
     let that = this;
     if (!that.data.chat) {
       that.setData({
@@ -164,7 +162,7 @@ Page({
   },
 
   // 只看动态
-  onMomentsTap: function () {
+  onTrendTap: function () {
     let that = this;
     if (!that.data.moments) {
       that.setData({
@@ -254,7 +252,7 @@ Page({
     let dataBean = JSON.stringify(e.currentTarget.dataset.item)
     let formData = JSON.stringify(this.data.formData);
     wx.navigateTo({
-      url: '../detail/detail?dataBean=' + dataBean + '&formData=' + formData,
+      url: '../detail/discussion?dataBean=' + dataBean + '&formData=' + formData,
     })
   },
 
@@ -262,7 +260,7 @@ Page({
   getData: function () {
     var that = this;
     wx.request({
-      url: baseUrl + '/trends/byuser/' + that.data.formData.studentId,
+      url: baseUrl + '/api/trends/byuser/' + that.data.formData.studentId,
       method: "GET",
       success: (res) => {
         let statusCode = res.data.code;
@@ -288,7 +286,7 @@ Page({
     var index = e.currentTarget.dataset.item;
     var o = {};
     wx.request({
-      url: baseUrl + '/trends/favor',
+      url: baseUrl + '/api/trends/favor',
       method: 'PUT',
       data: {
         trend_id: that.data.posts[index].trend_id,
@@ -326,7 +324,7 @@ Page({
     let totalValue = JSON.parse(unfomattedValue).data.trends;
     var basePosts = that.data.posts;
     for (let index = 0; index < totalValue.length; index++) {
-      let finalTmp = totalValue[index].trend_picture ? picUrl + JSON.stringify(totalValue[index].trend_picture).split(';')[0].replace(/"/g, '') : '';
+      let finalTmp = totalValue[index].trend_picture ? baseUrl + '/img/' + JSON.stringify(totalValue[index].trend_picture).split(';')[0].replace(/"/g, '') : '';
       basePosts[index].firstPic = finalTmp;
     }
     that.setData({ 'posts': basePosts });
@@ -350,7 +348,7 @@ Page({
     let totalList = JSON.parse(tmp).data.trends;
     for (let index = 0; index < totalList.length; index++) {
       wx.request({
-        url: baseUrl + '/trends/favor/status',
+        url: baseUrl + '/api/trends/favor/status',
         method: "PUT",
         data: {
           user_id: that.data.formData.studentId,
@@ -433,14 +431,13 @@ Page({
       })
       return;
     };
-    console.log(1);
     wx.showModal({
       title: '确定删除？',
       content: '一旦执行无法撤销',
       success(res) {
         if (res.confirm) {
           wx.request({
-            url: 'http://134.175.25.93:3001/api/trends/' + that.data.posts[index].trend_id,
+            url: baseUrl + '/api/trends/' + that.data.posts[index].trend_id,
             method: "DELETE",
             success: (res) => {
               if (res.statusCode !== 200) {
@@ -479,7 +476,7 @@ Page({
   search: function () {
     let that = this;
     wx.request({
-      url: baseUrl + '/searchtrends/?word=' + that.data.searchInput,
+      url: baseUrl + '/api/searchtrends/?word=' + that.data.searchInput,
       success: (res) => {
         let tmp = JSON.stringify(res.data.data.products).slice(1, -1);
         let o = JSON.parse(tmp);

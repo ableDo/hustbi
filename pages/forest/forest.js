@@ -2,16 +2,16 @@
 
 const s = require("../../utils/store.js")
 const t = require("../../utils/t.js")
+const baseUrl = 'https://temp.l-do.cn'
 
-
-const baseUrl = 'http://134.175.25.93:3001/api'
-const picUrl = 'http://134.175.25.93:3001/img/'
+const utils = require('../../utils/util.js')
 
 Page({
   /**
    * 页面的初始数据
    */
   data: {
+    scroll: 0,
     scrollTop: 0,
     hidden: false,
     chat: false,
@@ -40,15 +40,9 @@ Page({
     path: "./img/profile-1.png",
 
     unrefreshing: true,
-    scrollTop: 0,
   },
 
-  genProfile: function() {
-    let src = "./img/profile-" + Math.floor(Math.random() * 11) + '.png';
-    this.setData({
-      path: src,
-    })
-  },
+ 
   /**
    * 生命周期函数--监听页面加载
    */
@@ -57,7 +51,8 @@ Page({
       title: s("l") === 0 ? "绿色森林" : "Green Forest"
     });
 
-    this.genProfile();
+    utils.genProfile("./img/profile-", 'path', this);
+    // this.genProfile();
     this.onLoadUserInfo();
 
     let that = this;
@@ -101,7 +96,6 @@ Page({
     wx.showLoading({
       title: '正在加载',
     });
-    
     wx.request({
       url: s('url'),
       method: 'POST',
@@ -168,8 +162,8 @@ Page({
     }
   },
 
-  // 只看讨论 trend 0动态  
-  onChatTap: function() {
+  // 只看讨论
+  onDiscussionTap: function() {
     let that = this;
     if (!that.data.chat) {
       that.setData({
@@ -196,7 +190,7 @@ Page({
   },
 
   // 只看动态
-  onMomentsTap: function() {
+  onTrendTap: function() {
     let that = this;
     if (!that.data.moments) {
       that.setData({
@@ -286,7 +280,7 @@ Page({
     let dataBean = JSON.stringify(e.currentTarget.dataset.item)
     let formData = JSON.stringify(this.data.formData);
     wx.navigateTo({
-      url: e.currentTarget.dataset.item.is_trend? './detail/moment?dataBean=' + dataBean + '&formData=' + formData : './detail/detail?dataBean=' + dataBean + '&formData='  + formData,
+      url: e.currentTarget.dataset.item.is_trend == "1" ? './detail/trend?dataBean=' + dataBean + '&formData=' + formData : './detail/discussion?dataBean=' + dataBean + '&formData='  + formData,
     })
   },
 
@@ -294,19 +288,20 @@ Page({
   getData: function() {
     var that = this;
     wx.request({
-      url: baseUrl + '/trends',
+      url: baseUrl + '/api/trends',
       method: "GET",
-      success: (res) => {      
-        let statusCode = res.data.code;
-        if (statusCode == 200) {
+      success: (res) => {     
+        console.log(res); 
+        let statusCode = res.data.data.code;
+        if (statusCode !== 200 && statusCode !== "200") {
           that.setData({
              posts: res.data.data.trends,
              tmpPosts: res.data.data.trends,
           });
-          that.getPic(res.data);
-          that.getType(res.data);
+          utils.getPic(that, res.data, 'posts');
+          utils.getType(that, res.data, 'posts');
           that.getState(res.data);
-        } else if (statusCode == 404) {
+        } else {
           wx.showToast({
             title: '未知错误',
           })
@@ -321,7 +316,7 @@ Page({
     var index = e.currentTarget.dataset.item;
     var o = {};
     wx.request({
-      url: baseUrl + '/trends/favor',
+      url: baseUrl + '/api/trends/favor',
       method: 'PUT',
       data: {
         trend_id: that.data.posts[index].trend_id ,
@@ -352,38 +347,12 @@ Page({
     })
   },
 
-  // 切割url获得第一张图（或者没图
-  getPic: function (value) {
-    let that = this;
-    let unfomattedValue = JSON.stringify(value).replace('\n', '');
-    let totalValue = JSON.parse(unfomattedValue).data.trends;
-    var basePosts = that.data.posts;
-    for (let index = 0; index < totalValue.length; index++) {
-      let finalTmp = totalValue[index].trend_picture ? picUrl + JSON.stringify(totalValue[index].trend_picture).split(';')[0].replace(/"/g, '') : '';
-      basePosts[index].firstPic = finalTmp;
-    }
-    that.setData({ 'posts': basePosts });
-  },
-
-
-  getType: function (value) {
-    let that = this;
-    let tmp = JSON.stringify(value).replace('\n', '');
-    let totalList = JSON.parse(tmp).data.trends;
-    let basePosts = that.data.posts;
-    for (let index = 0; index < totalList.length; index++) {
-      basePosts[index].type = false;
-    }
-    that.setData({'posts': basePosts});
-  },
-
   getState: function (value) {
     let that = this;
-    let tmp = JSON.stringify(value).replace('\n', '');
-    let totalList = JSON.parse(tmp).data.trends;
+    let totalList = JSON.parse(JSON.stringify(value).replace('\n', '')).data.trends;
     for (let index = 0; index < totalList.length; index++) {
       wx.request({
-        url: baseUrl + '/trends/favor/status',
+        url: baseUrl + '/api/trends/favor/status',
         method: "PUT",
         data: {
           user_id: that.data.formData.studentId,
@@ -404,7 +373,6 @@ Page({
         }
       })
     };
-    // that.setData({ 'posts': basePosts });
   },
 
   onTapScrollToTop: function() {
@@ -420,7 +388,7 @@ Page({
   search: function() {
     let that = this;
     wx.request({
-      url: baseUrl + '/searchtrends/?word=' + that.data.searchInput,
+      url: baseUrl + '/api/searchtrends/?word=' + that.data.searchInput,
       success: (res) => {
         that.setData({
           posts: res.data.data.trends,
@@ -438,6 +406,9 @@ Page({
   },
   onScrollToUpper: function(e) {
     var that = this;
+    if (that.data.scroll <= 2 ) {
+      return;
+    }
     that.setData({
       unrefreshing: false,
     })
@@ -448,6 +419,12 @@ Page({
         unrefreshing: true,
       });
       that.setInitState();
-    },5000);
+    }, 3000);
+  },
+  onScroll: function(e) {
+    console.log(e);
+    this.setData({
+      scroll: e.detail.scrollTop,
+    })
   }
 })

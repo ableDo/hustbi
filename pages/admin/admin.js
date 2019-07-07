@@ -2,19 +2,19 @@
 const s = require("../../utils/store.js")
 const t = require("../../utils/t.js")
 
-const check = require("../../utils/password.js")
+// const check = require("../../utils/password.js")
 
-const baseurl = 'https://134.175.25.93:3001/api/login';
+const baseUrl = 'https://temp.l-do.cn/api/login';
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    'accountConfig': 'color: #6F6F6F',
-    'passwordConfig': 'color: #6F6F6F',
-    'accountInput':'',
-    'passwordInput':'',
+    accountConfig: 'color: #6F6F6F',
+    passwordConfig: 'color: #6F6F6F',
+    accountInput:'',
+    passwordInput:'',
   },
 
   /**
@@ -95,18 +95,26 @@ Page({
   // 提交数据
   submit: function() {
     var that = this;
-    if (check(that.data.accountInput, that.data.passwordInput)) {
-      wx.showToast({
-        title: '登陆成功',
-      })
-      wx.navigateTo({
-        url: '../forest/admin/admin?isStuff=1',
-      })
-    } else {
-      wx.showToast({
-        title: '登陆失败',
-      })
-    }
+    wx.request({
+      url: baseUrl,
+      method: "POST",
+      data: {
+        user_name: that.data.accountInput,
+        password: that.data.passwordInput
+      },
+      success: (res) => {
+        if (res.data.code !== "200") {
+          wx.showToast({
+            title: res.data.message,
+            icon: 'none'
+          })
+          return;
+        }
+        wx.navigateTo({
+          url: '../forest/admin/admin',
+        })
+      }
+    })
 
   },
 
@@ -123,6 +131,11 @@ Page({
       title: title,
       icon: icon,
       duration: duration
+    })
+  },
+  chagePassword: function() {
+    wx.navigateTo({
+      url: './change-password',
     })
   }
 })

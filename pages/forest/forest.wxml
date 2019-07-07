@@ -21,7 +21,7 @@
       </view>
 
       <!-- chat -->
-      <view class="chat" bindtap='onChatTap'>
+      <view class="chat" bindtap='onDiscussionTap'>
         <view class='image-wrapper'>
           <image src="{{chat ? './img/chat-green.png' : './img/chat.png'}}"></image>
         </view>
@@ -29,7 +29,7 @@
       </view>
 
       <!-- moments -->
-      <view class="moments" bindtap='onMomentsTap'>
+      <view class="moments" bindtap='onTrendTap'>
         <view class='image-wrapper'>
           <image src="{{moments ? './img/moments-green.png' : './img/moments.png'}}"></image>
         </view>
@@ -60,7 +60,7 @@
       </view>
     <!-- content chat/moments -->
     <view class='content'>
-      <scroll-view class='section' scroll-y='true' style="height:{{scrollerViewHeight}}px" scroll-top='{{scrollTop}}' bindscrolltoupper="onScrollToUpper">
+      <scroll-view class='section' scroll-y='true' style="height:{{scrollerViewHeight}}px" scroll-top='{{scrollTop}}' bindscrolltoupper="onScrollToUpper" bindscroll="onScroll">
         <view class='card' bindtap='onTapCertainCard' data-item="{{item}}" wx:for="{{posts}}" hidden='{{item.type}}'>
           <view id="move-area">
             <view id='move-view' direction='horizontal' x='{{item.xmove}}' bindchange='handleMoveableChange' data-postsIndex='{{index}}'>
@@ -71,7 +71,7 @@
                     <image src="{{item.is_trend == 1 ? './img/moments-green.png' : './img/chat-green.png'}}"></image>
                   </view>
                 </view>
-                <view class='sum'>{{item.is_trend == 1 ? item.trend_content : item.argue_topic}}</view>
+                <view class='sum'>{{item.is_trend == "1" ? item.trend_content : item.argue_topic}}</view>
                 <image src="http://134.175.25.93:3001/img/{{item.firstimg}}" id='include-image' mode='aspectFill'></image>
               
                 <view class='bottom-section'>

@@ -1,11 +1,11 @@
 // pages/forest/detail/discussion.js
 // 讨论
-const picUrl = 'http://134.175.25.93:3001/img/'
-const baseUrl = 'http://134.175.25.93:3001/api'
+
+const baseUrl = 'https://temp.l-do.cn'
 
 const s = require("../../../utils/store.js")
 const t = require("../../../utils/t.js")
-
+const utils = require("../../../utils/util.js")
 
 Page({
 
@@ -21,6 +21,8 @@ Page({
     content: '',
     chat:{},
 
+    isTrend: 0,
+    isStuff: 0,
     t,
     l: s("l"),
   },
@@ -29,23 +31,27 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log('hererererererere')
     wx.setNavigationBarTitle({
       title: s("l") === 0 ? "动态详情" : "Detail"
     });
 
     // console.log(options);
-    var that = this
+    var that = this;
     let dataBean = JSON.parse(options.dataBean);
     let formData = JSON.parse(options.formData);
+    if (options.isStuff) {
+      that.setData({
+        isStuff: 1
+      })
+    }
     that.setData({
       dataBean: dataBean,
-      isTrend: dataBean.is_trend,
       formData: {
         studentId: formData.studentId,
         name: formData.name,
       }
     })
+    console.log(that.data.dataBean);
     that.loadPic(dataBean.trend_picture);
     that.getArguments();
   },
@@ -110,7 +116,7 @@ Page({
     }
     let src = 'argue_content';
     wx.request({
-      url: baseUrl + '/argues',
+      url: baseUrl + '/api/argues',
       method: "POST",
       data: {
         trend_id: that.data.dataBean.trend_id,
@@ -119,7 +125,6 @@ Page({
         argue_content: that.data.content,
       },
       complete: function(res) {
-        console.log(res);
         if (res.data.code !== '200') {
           wx.showToast({
             title: '未知错误！',
@@ -144,7 +149,7 @@ Page({
     var pictures = {};
     var tmp = JSON.stringify(value).split(';');
     for (var index = 0; index < tmp.length; index++) {
-      pictures[index] = picUrl + tmp[index].replace(/"/g, '');
+      pictures[index] = baseUrl + '/img/' + tmp[index].replace(/"/g, '');
     }
     that.setData({pictures: pictures});
     
@@ -154,7 +159,7 @@ Page({
   onTapWarn: function(e) {
     let that = this;
     wx.request({
-      url: baseUrl + '/trends/report/' + that.data.dataBean.trend_id,
+      url: baseUrl + '/api/trends/report/' + that.data.dataBean.trend_id,
       method: 'POST',
       complete: function(res) {
         if (res.data.code !== '200') {
@@ -171,6 +176,48 @@ Page({
       }
     })
   },
+  onTapFavorArgue : function(e){
+    let that = this;
+    let index = e.currentTarget.dataset.index;
+    let id = that.data.chat[index].folowargue_id, num = that.data.chat[index].favor_num;
+    let str = 'chat[' + index + '].favor_num';
+    wx.request({
+      url: baseUrl + '/api/argues/favor/status',
+      method: "PUT",
+      data: {
+        user_id: that.data.formData.studentId,
+        argue_id: id,
+      },
+      success: (res) => {
+        if (res.data.data.isfavor == "1") {
+          wx.showToast({
+            title: '点过赞了哦',
+            icon: 'none'
+          });
+          return;
+        }
+        wx.request({
+          url: baseUrl + '/api/argues/favor/',
+          method: "PUT",
+          data: {
+            user_id: that.data.formData.studentId,
+            user_name: that.data.formData.name,
+            argue_id: id,
+          },
+          success: (res) => {
+            that.setData({
+              [str]: num += 1,
+            })
+          }
+        })
+        
+      }
+    })
+
+
+    
+    
+  },
 
   // 点赞，没写呢
   onTapFavor: function(e) {
@@ -183,14 +230,13 @@ Page({
       return;
     }
     wx.request({
-      url: baseUrl + '/trends/favor',
+      url: baseUrl + '/api/trends/favor',
       method: 'PUT',
       data: {
         trend_id: that.data.dataBean.trend_id,
         user_id: that.data.formData.studentId,
       },
       complete: function (res) {
-        console.log(res)
         if (res.data.code == 200) {
           let str = 'dataBean.state';
           that.setData({
@@ -215,12 +261,10 @@ Page({
   getArguments: function() {
     var that = this;
     wx.request({
-      url: baseUrl + '/argues/' + that.data.dataBean.trend_id,
+      url: baseUrl + '/api/argues/' + that.data.dataBean.trend_id,
       method: "GET",
       complete: (res) => {
-        console.log(res)
         let o = res.data.data.products;
-          // console.log(str);
         if (o) {
           that.setData({
             chat: o,

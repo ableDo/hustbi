@@ -1,7 +1,6 @@
 // pages/forest/detail/moment.js
 // 动态
-const picUrl = 'http://134.175.25.93:3001/img/'
-const baseUrl = 'http://134.175.25.93:3001/api'
+const baseUrl = 'https://temp.l-do.cn'
 
 const s = require("../../../utils/store.js")
 const t = require("../../../utils/t.js")
@@ -15,11 +14,12 @@ Page({
   data: {
     dataBean: '',
     pictures: '',
+    isTrend: 1,
 
     formData: {
     },
     content: '',
-    chat: {},
+    comments: {},
 
     t,
     l: s("l"),
@@ -30,7 +30,7 @@ Page({
    */
   onLoad: function (options) {
     wx.setNavigationBarTitle({
-      title: s("l") === 0 ? "动态详情" : "Detail"
+      title: s("l") === 0 ? "动态详情" : "Trend Detail"
     });
 
     var that = this
@@ -38,14 +38,13 @@ Page({
     let formData = JSON.parse(options.formData);
     that.setData({
       dataBean: dataBean,
-      isTrend: dataBean.is_trend,
       formData: {
         studentId: formData.studentId,
         name: formData.name,
       }
     })
     that.loadPic(dataBean.trend_picture);
-    that.getArguments();
+    that.getComments();
   },
 
   /**
@@ -106,9 +105,9 @@ Page({
       })
       return;
     }
-    // let str = that.data.dataBean.is_trend ? 'comment_content' : 'argue_content';
+    
     wx.request({
-      url: baseUrl + '/comments',
+      url: baseUrl + '/api/comments',
       method: "POST",
       data: {
         trend_id: that.data.dataBean.trend_id,
@@ -117,7 +116,6 @@ Page({
         comment_content: that.data.content,
       },
       complete: function (res) {
-        console.log(res);
         if (res.data.code !== '200') {
           wx.showToast({
             title: '未知错误！',
@@ -128,7 +126,7 @@ Page({
             title: '评论成功',
             icon: 'success',
           })
-          that.getArguments();
+          that.getComments();
           that.setData({
             content: '',
           })
@@ -142,7 +140,7 @@ Page({
     var pictures = {};
     var tmp = JSON.stringify(value).split(';');
     for (var index = 0; index < tmp.length; index++) {
-      pictures[index] = picUrl + tmp[index].replace(/"/g, '');
+      pictures[index] = baseUrl + '/img/' + tmp[index].replace(/"/g, '');
     }
     that.setData({ pictures: pictures });
 
@@ -152,7 +150,7 @@ Page({
   onTapWarn: function (e) {
     let that = this;
     wx.request({
-      url: baseUrl + '/trends/report/' + that.data.dataBean.trend_id,
+      url: baseUrl + '/api/trends/report/' + that.data.dataBean.trend_id,
       method: 'POST',
       complete: function (res) {
         if (res.data.code !== '200') {
@@ -181,14 +179,13 @@ Page({
       return;
     }
     wx.request({
-      url: baseUrl + '/trends/favor',
+      url: baseUrl + '/api/trends/favor',
       method: 'PUT',
       data: {
         trend_id: that.data.dataBean.trend_id,
         user_id: that.data.formData.studentId,
       },
       complete: function (res) {
-        console.log(res)
         if (res.data.code == 200) {
           let str = 'dataBean.state';
           that.setData({
@@ -210,32 +207,24 @@ Page({
     })
   },
 
-  getArguments: function () {
+  getComments: function () {
     var that = this;
-    console.log(that.data.dataBean)
     wx.request({
-      url: baseUrl + '/comments/' + that.data.dataBean.trend_id,
+      url: baseUrl + '/api/comments/' + that.data.dataBean.trend_id,
       method: "GET",
       complete: (res) => {
-        console.log(res)
-        let o = {};
-        let tmp = res.data.data.comments;
-        let str = '[{' + JSON.stringify(tmp).slice(1, -1) + '}]';
-        o = JSON.parse(str);
-        if (o) {
-          that.setData({
-            chat: o,
-          })
-          that.genProfile();
-        }
+        that.setData({
+          comments: res.data.data.comments,
+        })   
+        that.genProfile();
       }
     })
   },
   genProfile: function () {
     let that = this;
-    for (let i = 0; i < that.data.chat.length; i++) {
+    for (let i = 0; i < that.data.comments.length; i++) {
       let path = '../img/profile-' + Math.floor(Math.random() * 11) + '.png';
-      let str = 'chat[' + i + '].path';
+      let str = 'comments[' + i + '].path';
       that.setData({
         [str]: path,
       })

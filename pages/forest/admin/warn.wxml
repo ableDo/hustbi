@@ -20,7 +20,7 @@
       </view>
 
       <!-- chat -->
-      <view class="chat" bindtap='onChatTap'>
+      <view class="chat" bindtap='onDiscussionTap'>
         <view class='image-wrapper'>
           <image src="{{chat ? '../img/chat-green.png' : '../img/chat.png'}}"></image>
         </view>
@@ -28,7 +28,7 @@
       </view>
 
       <!-- moments -->
-      <view class="moments" bindtap='onMomentsTap'>
+      <view class="moments" bindtap='onTrendTap'>
         <view class='image-wrapper'>
           <image src="{{moments ? '../img/moments-green.png' : '../img/moments.png'}}"></image>
         </view>

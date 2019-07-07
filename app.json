@@ -13,11 +13,11 @@
     "pages/forest/forest",
     "pages/admin/admin",
     "pages/forest/create/create",
-    "pages/forest/user/user",
-    "pages/forest/detail/detail",
+    "pages/forest/detail/discussion",
     "pages/forest/admin/admin",
     "pages/forest/admin/warn",
-    "pages/forest/detail/moment"
+    "pages/forest/detail/trend",
+    "pages/admin/change-password"
   ],
   "window": {
     "backgroundTextStyle": "light",

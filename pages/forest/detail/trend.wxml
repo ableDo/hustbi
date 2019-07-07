@@ -23,12 +23,12 @@
         <view class='favor-icon-wrapper' bindtap='onTapFavor'>
           <image src="{{dataBean.state ? '../img/favored.png' : '../img/unfavored.png'}}"></image>
         </view>
-        <view class='agree-num'>{{item.favor_num ? item.favor_num : 0}}个赞</view>
+        <view class='agree-num'>{{dataBean.favor_num ? dataBean.favor_num : 0}}个赞</view>
       </view>
     <!-- </view> -->
 
     <view id='chat-block' >
-      <view class='item-wrapper' wx:for="{{chat}}">
+      <view class='item-wrapper' wx:for="{{comments}}">
         <view class='upper'>
           <view class='name'>
             <text>{{item.user_name}}：</text>

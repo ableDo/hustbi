@@ -29,7 +29,7 @@
         <input type='text' id='password-password' maxlength='20' bindfocus='onPasswordFocus' bindblur='onPasswordBlur' bindinput='getPassword'></input>
       </view>
     </view>
-
     <button bindtap='submit'>登陆</button>
+    <view id='change' bindtap='chagePassword'>修改密码</view>
   </view>
 </view>

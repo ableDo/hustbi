@@ -7,7 +7,9 @@
           <image  src='../img/profile-1.png'></image>
         </view>
         <view class='author'>{{dataBean.user_name}}</view>
+        <view id='total-floor' hidden='{{isStuff}}'>共{{chat ? chat.length : 0}}楼</view>
       </view>
+      <view class='topic'>{{dataBean.argue_topic}}</view>
       <view class='content'>{{dataBean.trend_content}}</view>
       <view class='image-view' wx:for="{{pictures}}">
         <view class='image-wrapper'>
@@ -22,7 +24,7 @@
         <view class='favor-icon-wrapper' bindtap='onTapFavor'>
           <image src="{{dataBean.state ? '../img/favored.png' : '../img/unfavored.png'}}"></image>
         </view>
-        <view class='agree-num'>{{item.favor_num ? item.favor_num : 0}}个赞</view>
+        <view class='agree-num'>{{dataBean.favor_num ? dataBean.favor_num : 0}}个赞</view>
       </view>
     </view>
 
@@ -33,14 +35,18 @@
           <image src="{{item.path}}"></image>
         </view>
         <view class='name'>{{item.user_name}}</view>
-        <view class='floor'>第{{index + 1}}层</view>
+        <view class='floor' hidden='{{isStuff}}'>{{index + 1}}楼</view>
       </view>
       <view class='chat-content'>{{item.argue_content}}</view> 
-        <view class='lower'>
+      <view class='lower'>
         <view class='time'>{{item.argue_time}}</view>
         <view class='warn-item-wrapper' bindtap='onTapWarn'>
           <image src='../img/warn.png'></image>
         </view>
+        <view class='favor-item-wrapper' bindtap='onTapFavorArgue' data-index='{{index}}'>
+          <image src='../img/unfavored.png'></image>
+        </view>
+        <view class='favor-num'>{{item.favor_num ? item.favor_num : 0}}个赞</view>
       </view>
     </view>
   </view>
