@@ -140,7 +140,7 @@ Page({
     var pictures = {};
     var tmp = JSON.stringify(value).split(';');
     for (var index = 0; index < tmp.length; index++) {
-      pictures[index] = baseUrl + '/img/' + tmp[index].replace(/"/g, '');
+      pictures[index] = baseUrl + '/img/normal/' + tmp[index].replace(/"/g, '');
     }
     that.setData({ pictures: pictures });
 

@@ -72,7 +72,7 @@
                 </view>
                 <view class='sum'>{{item.trend_content}}</view>
                 <!-- 接口给反了，所以我反着写 -->
-                <image src="https://temp.l-do.cn/img/{{item.firstimg}}" id='include-image' mode='aspectFill'></image>
+                <image src="https://temp.l-do.cn/img/compress/{{item.firstimg}}" id='include-image' mode='aspectFill'></image>
               
                 <view class='bottom-section'>
                   <view class='time'>{{item.trend_time}}</view>

@@ -37,6 +37,7 @@ Page({
 
     // console.log(options);
     var that = this;
+    console.log(options);
     let dataBean = JSON.parse(options.dataBean);
     let formData = JSON.parse(options.formData);
     if (options.isStuff) {
@@ -149,7 +150,7 @@ Page({
     var pictures = {};
     var tmp = JSON.stringify(value).split(';');
     for (var index = 0; index < tmp.length; index++) {
-      pictures[index] = baseUrl + '/img/' + tmp[index].replace(/"/g, '');
+      pictures[index] = baseUrl + '/img/normal/' + tmp[index].replace(/"/g, '');
     }
     that.setData({pictures: pictures});
     
@@ -180,7 +181,8 @@ Page({
     let that = this;
     let index = e.currentTarget.dataset.index;
     let id = that.data.chat[index].folowargue_id, num = that.data.chat[index].favor_num;
-    let str = 'chat[' + index + '].favor_num';
+    let str1 = 'chat[' + index + '].favor_num'; 
+    let str2 = 'chat[' + index + '].isfavored';
     wx.request({
       url: baseUrl + '/api/argues/favor/status',
       method: "PUT",
@@ -206,7 +208,8 @@ Page({
           },
           success: (res) => {
             that.setData({
-              [str]: num += 1,
+              [str1]: num += 1,
+              [str2]: 1,
             })
           }
         })
@@ -261,10 +264,11 @@ Page({
   getArguments: function() {
     var that = this;
     wx.request({
-      url: baseUrl + '/api/argues/' + that.data.dataBean.trend_id,
+      url: baseUrl + '/api/argues/relevent?trend_id=' + that.data.dataBean.trend_id + '&user_id=' + that.data.formData.studentId ,
       method: "GET",
       complete: (res) => {
-        let o = res.data.data.products;
+        console.log(res);
+        let o = res.data.data.data;
         if (o) {
           that.setData({
             chat: o,

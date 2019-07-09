@@ -279,8 +279,12 @@ Page({
   onTapCertainCard: function(e) {
     let dataBean = JSON.stringify(e.currentTarget.dataset.item)
     let formData = JSON.stringify(this.data.formData);
+    console.log(formData);
+    let str1 = './detail/trend?dataBean=' + dataBean + '&formData=' + formData;
+    let str2 = './detail/discussion?dataBean=' + dataBean + '&formData=' + formData;
+    console.log(str1);
     wx.navigateTo({
-      url: e.currentTarget.dataset.item.is_trend == "1" ? './detail/trend?dataBean=' + dataBean + '&formData=' + formData : './detail/discussion?dataBean=' + dataBean + '&formData='  + formData,
+      url: e.currentTarget.dataset.item.is_trend == "1" ? str1 : str2,
     })
   },
 

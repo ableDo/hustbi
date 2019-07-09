@@ -72,7 +72,7 @@
                   </view>
                 </view>
                 <view class='sum'>{{item.is_trend == "1" ? item.trend_content : item.argue_topic}}</view>
-                <image src="http://134.175.25.93:3001/img/{{item.firstimg}}" id='include-image' mode='aspectFill'></image>
+                <image src="https://temp.l-do.cn/img/compress/{{item.firstimg}}" id='include-image' mode='aspectFill'></image>
               
                 <view class='bottom-section'>
                   <view class='time'>{{item.trend_time}}</view>

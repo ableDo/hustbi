@@ -44,7 +44,7 @@
           <image src='../img/warn.png'></image>
         </view>
         <view class='favor-item-wrapper' bindtap='onTapFavorArgue' data-index='{{index}}'>
-          <image src='../img/unfavored.png'></image>
+          <image src="{{item.isfavored ? '../img/favored.png' : '../img/unfavored.png'}}"></image>
         </view>
         <view class='favor-num'>{{item.favor_num ? item.favor_num : 0}}个赞</view>
       </view>
