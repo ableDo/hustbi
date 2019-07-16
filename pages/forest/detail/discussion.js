@@ -32,7 +32,7 @@ Page({
    */
   onLoad: function (options) {
     wx.setNavigationBarTitle({
-      title: s("l") === 0 ? "动态详情" : "Detail"
+      title: s("l") === 0 ? "讨论详情" : "Detail"
     });
 
     // console.log(options);
@@ -150,7 +150,7 @@ Page({
     var pictures = {};
     var tmp = JSON.stringify(value).split(';');
     for (var index = 0; index < tmp.length; index++) {
-      pictures[index] = baseUrl + '/img/normal/' + tmp[index].replace(/"/g, '');
+      pictures[index] = baseUrl + '/img/' + tmp[index].replace(/"/g, '');
     }
     that.setData({pictures: pictures});
     
@@ -240,12 +240,22 @@ Page({
         user_id: that.data.formData.studentId,
       },
       complete: function (res) {
+        let str = 'dataBean.state';
+        let str1 = 'dataBean.favor_num';
+        let num = that.data.dataBean.favor_num ? that.data.dataBean.favor_num : 0;
+
         if (res.data.code == 200) {
           let str = 'dataBean.state';
           that.setData({
             [str]: 1,
+            [str1]: num + 1,
           });
-        } else {
+        } else if (res.data.code == 305) {
+          wx.showToast({
+            title: '点过赞了',
+          })
+          return;
+        }else {
           wx.showToast({
             title: '似乎有网络错误哦',
           })

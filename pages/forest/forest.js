@@ -328,13 +328,6 @@ Page({
       },
       complete: function(res) {
         if (res.data.code == 200 ) {
-          if (that.data.posts[index].state) {
-            wx.showToast({
-              title: '您已经点过赞了',
-              icon: 'none',
-            });
-            return;
-          }
           let str = 'posts[' + index + '].state';
           let number = that.data.posts[index].favor_num + 1;
           let str2 = 'posts[' + index + '].favor_num'
@@ -342,7 +335,13 @@ Page({
             [str]: 1,
             [str2]: number,
           });
-        } else {
+        } else if (res.data.code == 305) {
+            wx.showToast({
+              title: '您已经点过赞了',
+              icon: 'none',
+            });
+            return;
+          }else {
           wx.showToast({
             title: '似乎有网络错误哦',
           })

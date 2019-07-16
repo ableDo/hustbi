@@ -27,7 +27,7 @@ const getPic = (context, response, key) => {
   let totalValue = JSON.parse(unfomattedValue).data.trends;
   var basePosts = context.data.posts;
   for (let index = 0; index < totalValue.length; index++) {
-    let finalTmp = totalValue[index].trend_picture ? baseUrl + '/img/normal/' + JSON.stringify(totalValue[index].trend_picture).split(';')[0].replace(/"/g, '') : '';
+    let finalTmp = totalValue[index].trend_picture ? baseUrl + '/img/' + JSON.stringify(totalValue[index].trend_picture).split(';')[0].replace(/"/g, '') : '';
     basePosts[index].firstPic = finalTmp;
   }
   context.setData({ [key]: basePosts });

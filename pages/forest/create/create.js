@@ -270,7 +270,6 @@ Page({
     wx.showLoading({
       title: '正在上传第' + count + '张',
     });
-   
     wx.uploadFile({
       url: baseUrl + '/img/',
       filePath: imagePaths[count],
@@ -383,7 +382,7 @@ Page({
                       ctx.setTextAlign('center')
                       ctx.setFillStyle('#57A838')
                       ctx.setFontSize(30)
-                      ctx.fillText(step, 166, 426)//用户昵称
+                      ctx.fillText(step, 166, 426)
                       ctx.stroke()
                       ctx.draw()
                       wx.canvasToTempFilePath({

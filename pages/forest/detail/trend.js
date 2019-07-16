@@ -140,7 +140,7 @@ Page({
     var pictures = {};
     var tmp = JSON.stringify(value).split(';');
     for (var index = 0; index < tmp.length; index++) {
-      pictures[index] = baseUrl + '/img/normal/' + tmp[index].replace(/"/g, '');
+      pictures[index] = baseUrl + '/img/' + tmp[index].replace(/"/g, '');
     }
     that.setData({ pictures: pictures });
 
@@ -186,17 +186,24 @@ Page({
         user_id: that.data.formData.studentId,
       },
       complete: function (res) {
-        if (res.data.code == 200) {
+        if (res.data.code == 200 || res.data.code == "200") {
           let str = 'dataBean.state';
+          let str1 = 'dataBean.favor_num';
+          let num = that.data.dataBean.favor_num ? that.data.dataBean.favor_num : 0;
           that.setData({
             [str]: 1,
+            [str1]: num + 1,
           });
+        } else if (res.data.code == 305 || res.data.code == "305") {
+          wx.showToast({
+            title: '您已经点过赞了',
+          })
         } else {
           wx.showToast({
             title: '似乎有网络错误哦',
           })
         }
-        that.getArguments();
+        that.getComments();
       }
     })
   },
@@ -209,6 +216,7 @@ Page({
 
   getComments: function () {
     var that = this;
+    console.log(that.data.dataBean);
     wx.request({
       url: baseUrl + '/api/comments/' + that.data.dataBean.trend_id,
       method: "GET",

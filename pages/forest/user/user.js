@@ -324,7 +324,7 @@ Page({
     let totalValue = JSON.parse(unfomattedValue).data.trends;
     var basePosts = that.data.posts;
     for (let index = 0; index < totalValue.length; index++) {
-      let finalTmp = totalValue[index].trend_picture ? baseUrl + '/img/normal/' + JSON.stringify(totalValue[index].trend_picture).split(';')[0].replace(/"/g, '') : '';
+      let finalTmp = totalValue[index].trend_picture ? baseUrl + '/img/' + JSON.stringify(totalValue[index].trend_picture).split(';')[0].replace(/"/g, '') : '';
       basePosts[index].firstPic = finalTmp;
     }
     that.setData({ 'posts': basePosts });
